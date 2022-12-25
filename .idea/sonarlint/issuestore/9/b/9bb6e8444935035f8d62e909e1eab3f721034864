@@ -1,0 +1,8 @@
+
+W	php:S1808"=Move this open curly brace to the beginning of the next line.(ıÓ¶˜şÿÿÿÿ
+R	php:S1808"=Move this open curly brace to the beginning of the next line.(Şâ·Â
+_	php:S1808"JPut one space between the closing parenthesis and the opening curly brace.(Şâ·Â
+m	php:S1779"YReplace all non line feed end of line characters in this file "HomeController.php" by LF.8°ÂÚµÓ0
+	php:S1186"lAdd a nested comment explaining why this method is empty, throw an Exception or complete the implementation.(ƒöÙƒ
+@	php:S2003"&Replace "require" with "require_once".(õìã»ıÿÿÿÿ
+f	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(õìã»ıÿÿÿÿ

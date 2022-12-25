@@ -1,0 +1,9 @@
+
+e	php:S1779"QReplace all non line feed end of line characters in this file "Router.php" by LF.8Í…íôÓ0
+@	php:S2003"&Replace "require" with "require_once".(©¿Ç‚ùÿÿÿÿ
+@	php:S2003"&Replace "require" with "require_once".(œÊ¸Ìþÿÿÿÿ
+;	php:S2003"&Replace "require" with "require_once".(ëÛ¨ö
+?php:S125"Remove this commented out code.(ú®Ýþúÿÿÿÿ8¿•¾ØÓ0
+f	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(©¿Ç‚ùÿÿÿÿ
+f	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(œÊ¸Ìþÿÿÿÿ
+a	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(ëÛ¨ö

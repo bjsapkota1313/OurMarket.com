@@ -1,0 +1,7 @@
+
+W	php:S1808"=Move this open curly brace to the beginning of the next line.(·‘Σπώÿÿÿÿ
+d	php:S1808"JPut one space between the closing parenthesis and the opening curly brace.(·‘Σπώÿÿÿÿ
+F	php:S1781",Write this "Function" keyword in lower case.(·‘Σπώÿÿÿÿ
+n	php:S1779"ZReplace all non line feed end of line characters in this file "LoginController.php" by LF.8ίΒΪµΣ0
+G	php:S2003"&Replace "require" with "require_once".(―Ιΰ‡ψÿÿÿÿ8³®²Σ0
+m	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(―Ιΰ‡ψÿÿÿÿ8³®²Σ0
