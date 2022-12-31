@@ -9,13 +9,12 @@ class Router
         switch ($uri) {
             case '':
             case 'home' :
-            require __DIR__ . "/../controllers/HomeController.php";
-            $controller= new HomeController();
-            $controller->displayHomePage();
-            break;
+                require __DIR__ . "/../controllers/HomeController.php";
+                $controller = new HomeController();
+                $controller->displayHomePage();
+                break;
             case 'home/login':
                 require __DIR__ . '/../controllers/LoginController.php';
-//                require __DIR__ .'/../Views/CSS/LoginStyles.css';
                 $controller = new LoginController();
                 $controller->displayLoginPage();
                 break;
@@ -25,7 +24,21 @@ class Router
                 $controller = new HomeController();
                 $controller->about();
                 break;
-
+            case 'home/myAds':
+                require __DIR__ . '/../controllers/MyAdsController.php';
+                $controller = new MyAdsController();
+                $controller->displayMyAdsPage();
+                break;
+            case 'api/adsapi';
+                require __DIR__ . '/../API/Controllers/AdsController.php';
+                $controller = new AdsController();
+                $controller->index();
+                break;
+            case 'api/adsbyloggeduser';
+                require __DIR__ . '/../API/Controllers/AdsController.php';
+                $controller = new AdsController();
+                $controller->sendAdsByLoggedUser();
+                break;
             default:
                 http_response_code(404);
                 break;
