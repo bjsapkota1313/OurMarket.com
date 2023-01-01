@@ -58,6 +58,46 @@ class AdRepository extends Repository
         }
     }
 
+    public function updateStatusOfAd($status, $adID)
+    {
+        try {
+            $stmt = $this->connection->prepare("UPDATE Ads SET status= :status WHERE id= :adId");
+            $stmt->bindValue(":status", $status->label());
+            $stmt->bindValue(":adId", $adID);
+
+            if ($stmt->execute()) {
+                $rows_updated = $stmt->rowCount();
+                if ($rows_updated <= 0) {
+                   trigger_error(" Ad couldn't be Updated Please,Try again", E_USER_ERROR);
+
+                }
+            }
+        } catch (PDOException | Exception $e) {
+            trigger_error("An error occurred: " , E_USER_ERROR);
+        }
+
+    }
+
+    public function deleteAd($adID, $imageURI)
+    {
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM Ads  WHERE id= :adId");
+            $stmt->bindValue(":adId", $adID);
+            if ($stmt->execute()) {
+                $rows_updated = $stmt->rowCount();
+                if ($rows_updated > 0) {
+                    // delete the file if the database query was successful
+                    $imageFile=__DIR__.'/../public'.$imageURI;
+                    unlink($imageFile);
+                } else {
+                    trigger_error(" Ad couldn't be deleted", E_USER_ERROR);
+                }
+            }
+        } catch (PDOException| Exception   $e) {
+            trigger_error("An error occurred: " . $e->getMessage(), E_USER_ERROR);
+        }
+    }
+
     private function readOneAd($dBRow): Ad
     {
         $ad = new Ad();
@@ -90,10 +130,10 @@ class AdRepository extends Repository
         try {
             $stmt = $this->connection->prepare("INSERT INTO Ads( productName, description,  price, userID, imageURI) VALUES (:productName,:description,:price,:userID,:imageURI)");
             $stmt->bindValue(":productName", $ad->getProductName());
-            $stmt->bindValue(":description",$ad->getDescription());
-            $stmt->bindValue(":price",$ad->getPrice());
-            $stmt->bindValue(":userID",$ad->getUser()->getId());
-            $stmt->bindValue(":imageURI",$ad->getImageUri());
+            $stmt->bindValue(":description", $ad->getDescription());
+            $stmt->bindValue(":price", $ad->getPrice());
+            $stmt->bindValue(":userID", $ad->getUser()->getId());
+            $stmt->bindValue(":imageURI", $ad->getImageUri());
             $stmt->execute();
         } catch (PDOException $e) {
             echo $e;

@@ -14,7 +14,7 @@ class HomeController
     public function displayHomePage()
     {
         $ads=$this->adService->getAllAvailableAds(Status::Available); // only showing avaialble ads
-        require __DIR__ . "/../Views/pages/Home.php";
+        require __DIR__ . "/../Views/HomePage/Home.php";
         $this->loginAndLogout();
         if(is_null($ads)){
             echo"<H2> No products are in sale</H2>";

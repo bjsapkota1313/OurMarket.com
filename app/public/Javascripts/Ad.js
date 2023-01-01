@@ -76,16 +76,14 @@ function postNewAdd() {
         .then(function (responseData) {
             if (responseData.success) {
                 document.getElementById("close").click();
-                alert(responseData.message);
+                loadAdsOfLoggedUser();
             } else {
-                console.error(responseData.message);
                 alert(responseData.message);
             }
         });
 }
 
 function loadAdsOfLoggedUser() {
-    event.preventDefault();
     const inputLoggedUserId = document.getElementById("hiddenLoggedUserId").textContent;
     let data = {loggedUserId: inputLoggedUserId}
     // Send a POST request to the server with logged user and promising the ads as response of logged user
@@ -95,16 +93,14 @@ function loadAdsOfLoggedUser() {
         headers: {
             'Content-Type': 'application/json'
         }
-    }).then(response =>response.json())
+    }).then(response => response.json())
         .then(ads => {
-            document.getElementById("myAdsContainer").innerHTML=""; // clearing screen
+            clearScreen();// clearing screen
             // Handling the ads data here
             ads.forEach(function (ad) {
-                console.log(ad);
-                if(ad.status="Available"){
+                if (ad.status === "Available") {
                     displayAvailableAds(ad);
-                }
-                else{
+                } else {
                     displayOtherStatusAds(ad);
                 }
 
@@ -142,8 +138,8 @@ function dropFile(event) {
 function displayOtherStatusAds(ad) {
     const myAdsContainer = document.getElementById("myAdsContainer");
     let requireElements = createHorizontalAdCard(ad);
-    let card=requireElements[0];
-    let buttonContainer=requireElements[1];
+    let card = requireElements[0];
+    let buttonContainer = requireElements[1];
 
 // Create the "Mark As Sold" button element
     var markAsSoldButton = document.createElement("button");
@@ -188,20 +184,22 @@ function displayOtherStatusAds(ad) {
     overlay.appendChild(status);
     myAdsContainer.appendChild(card);
 }
-function displayAvailableAds(ad){
+
+function displayAvailableAds(ad) {
     const myAdsContainer = document.getElementById("myAdsContainer");
     let requireElements = createHorizontalAdCard(ad);
-    let card=requireElements[0];
-    let buttonContainer=requireElements[1];
+    let card = requireElements[0];
+    let buttonContainer = requireElements[1];
 
     // button Mark as Sold
-    var btnMarkAsSold = document.createElement("button");
-    btnMarkAsSold.type = "submit";
-    btnMarkAsSold.classList.add("btn", "btn-primary", "mx-2");
-    btnMarkAsSold.id = "btnMarkAsSold";
-    btnMarkAsSold.name = "btnMarkAsSold";
-    btnMarkAsSold.textContent = "Mark As Sold";
+    var btnMarkAsSold = document.createElement('button');
+    btnMarkAsSold.className = "btn btn-primary mx-2";
+    btnMarkAsSold.innerHTML = "Mark As Sold";
+    btnMarkAsSold.addEventListener('click', function() {
+        btnMarkAsSoldClicked(ad.id);
+    });
     buttonContainer.appendChild(btnMarkAsSold);
+
     // button Edit
     var btnEdit = document.createElement("button");
     btnEdit.classList.add("btn", "btn-secondary", "mx-2");
@@ -210,20 +208,20 @@ function displayAvailableAds(ad){
     btnEdit.appendChild(iconEdit);
     btnEdit.innerHTML += " Edit";
     buttonContainer.appendChild(btnEdit);
-    //button dDelete
-    var btnDelete = document.createElement("button");
-    btnDelete.classList.add("btn", "btn-danger", "mx-2");
-    btnDelete.id = "btnDeleteAd";
-    var iconDelete = document.createElement("i");
-    iconDelete.classList.add("fa-solid", "fa-trash");
-    iconDelete.name = "btnDeleteAd";
-    btnDelete.appendChild(iconDelete);
-    btnDelete.innerHTML += " Delete";
-    buttonContainer.appendChild(btnDelete);
+
+    //button Delete
+    var btnDeleteAd = document.createElement('button');
+    btnDeleteAd.className = "btn btn-danger mx-2";
+    btnDeleteAd.innerHTML = '<i class="fa-solid fa-trash"></i> Delete';
+    btnDeleteAd.addEventListener('click', function() {
+        btnDeleteAdClicked(ad.id, ad.imageUri);
+    });
+    buttonContainer.appendChild(btnDeleteAd);
     myAdsContainer.appendChild(card);
 
 }
-function createHorizontalAdCard(ad){
+
+function createHorizontalAdCard(ad) {
     // Create the main card element
     var card = document.createElement("div");
     card.classList.add("card", "mb-3");
@@ -296,5 +294,39 @@ function createHorizontalAdCard(ad){
     buttonContainer.classList.add("d-flex", "justify-content-end", "mb-2");
     detailsCol.appendChild(buttonContainer);
 
-    return [card,buttonContainer];
+    return [card, buttonContainer];
+}
+
+function btnMarkAsSoldClicked(adId) {
+    event.preventDefault();
+    sendUpdateRequestToAPi("ChangeStatusOfAd", adId, "", "Sold");
+}
+
+function btnDeleteAdClicked(adId, image) {
+    event.preventDefault();
+    sendUpdateRequestToAPi("DeleteAd", adId, image, "");
+
+}
+
+function sendUpdateRequestToAPi(typeOfOperation, adID, image, adStatus) {
+    let data = {OperationType: typeOfOperation, adID: adID, adStatus: adStatus, imageURI: image};
+
+    // Send a POST request to the server with logged user and promising the response message
+    fetch('http://localhost/api/updateAd', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => response.json())
+        .then(response => {
+            if (response.success) {
+                loadAdsOfLoggedUser(); /// when ever ads are deleted or marked as sold ads are loaded
+            } else {
+                alert(response.message);
+            }
+        })
+}
+function clearScreen(){
+    document.getElementById("myAdsContainer").innerHTML = ""; // clearing screen
 }

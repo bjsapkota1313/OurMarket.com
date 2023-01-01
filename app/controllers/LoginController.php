@@ -11,7 +11,7 @@ class LoginController
 
     public function displayLoginPage()
     {
-        require __DIR__ . "/../Views/pages/Login.php";
+        require __DIR__ . "/../Views/LoginPage/Login.php";
 
         if (isset($_POST["btnLogin"])) {
             $email = htmlspecialchars($_POST["email"]);

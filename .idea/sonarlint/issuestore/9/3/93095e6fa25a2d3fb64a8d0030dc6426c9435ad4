@@ -1,0 +1,20 @@
+
+fphp:S103"KSplit this 132 characters long line (which is greater than 120 authorized).(§³ΧΔ8ηνιΦ0
+h	php:S1808"GMove this "catch" to the same line as the previous closing curly brace.(Ά­Έ–ψÿÿÿÿ8ινιΦ0
+h	php:S1808&"GMove this "catch" to the same line as the previous closing curly brace.(Ά­Έ–ψÿÿÿÿ8κνιΦ0
+b	php:S18084"GMove this "catch" to the same line as the previous closing curly brace.(ΤΩ±'8λνιΦ0
+\	php:S1808/";Move this open curly brace to the end of the previous line.(ÒΜβ–ψÿÿÿÿ8μνιΦ0
+\	php:S18085";Move this open curly brace to the end of the previous line.(ÒΜβ–ψÿÿÿÿ8ξνιΦ0
+^	php:S1808>"=Move this open curly brace to the beginning of the next line.(Ξÿίωύÿÿÿÿ8ονιΦ0
+k	php:S1808"JPut one space between the closing parenthesis and the opening curly brace.(Ά­Έ–ψÿÿÿÿ8πνιΦ0
+k	php:S1808&"JPut one space between the closing parenthesis and the opening curly brace.(Ά­Έ–ψÿÿÿÿ8πνιΦ0
+k	php:S1808>"JPut one space between the closing parenthesis and the opening curly brace.(Ξÿίωύÿÿÿÿ8πνιΦ0
+k	php:S1808A"JPut one space between the closing parenthesis and the opening curly brace.(©θεΒϋÿÿÿÿ8πνιΦ0
+h	php:S1808"GPut one space between this "catch" keyword and the opening parenthesis.(Ά­Έ–ψÿÿÿÿ8πνιΦ0
+h	php:S1808&"GPut one space between this "catch" keyword and the opening parenthesis.(Ά­Έ–ψÿÿÿÿ8πνιΦ0
+f	php:S1808,"EPut one space between this "try" keyword and the opening curly brace.(΅»Άόωÿÿÿÿ8πνιΦ0
+e	php:S1808A"DPut one space between this "if" keyword and the opening parenthesis.(©θεΒϋÿÿÿÿ8πνιΦ0
+a	php:S1784"@Explicitly mention the visibility of this method "loginByEmail".(ό¥†±ώÿÿÿÿ8πνιΦ0
+m	php:S1779"YReplace all non line feed end of line characters in this file "UserRepository.php" by LF.8πνιΦ0
+r	php:S4833"QReplace "require_once" with namespace import mechanism through the "use" keyword.(μƒΐϊÿÿÿÿ8πνιΦ0
+r	php:S4833"QReplace "include_once" with namespace import mechanism through the "use" keyword.(κ‚‹€ψÿÿÿÿ8πνιΦ0

@@ -18,5 +18,11 @@ class AdService
     public function postNewAd(Ad $ad){
         $this->adRepository->postNewAd($ad);
     }
+    public function updateStatusOfAd($status, $adID){
+        $this->adRepository->updateStatusOfAd($status, $adID);
+    }
+    public function deleteAd($adID, $imageFile){
+        $this->adRepository->deleteAd($adID, $imageFile);
+    }
 
 }

@@ -39,6 +39,11 @@ class Router
                 $controller = new AdsController();
                 $controller->sendAdsByLoggedUser();
                 break;
+            case'api/updateAd';
+                require __DIR__ . '/../API/Controllers/AdsController.php';
+                $controller = new AdsController();
+                $controller->updateAdRequest();
+                break;
             default:
                 http_response_code(404);
                 break;

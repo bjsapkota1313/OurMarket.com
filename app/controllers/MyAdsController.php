@@ -13,11 +13,9 @@ class MyAdsController
     }
     public function displayMyAdsPage():void {
         $displayMessage=$this->displayInfo();
-        require __DIR__ . '/../Views/pages/MyAds.php';
+        require __DIR__ . '/../Views/MyAdsPage/MyAds.php';
         $this->loginAndSignout();
         $this->showAds();
-
-        //require __DIR__.'/../Views/Footer.php';
 
     }
     private function displayInfo() :string{
@@ -56,8 +54,9 @@ class MyAdsController
             //session_destroy();
             unset($_SESSION["loggedUser"]);
             echo '<script>
-             // enableLogin();
-           //   hidePostNewAd();
+              enableLogin();
+              hidePostNewAd();
+              clearScreen();
                 </script>';
         }
     }
@@ -74,24 +73,11 @@ class MyAdsController
         if (!is_null($this->loggedUser)) {
             if (!is_null($this->adService->getAdsByLoggedUser($this->loggedUser))) {
                 $loggedUserAds = $this->adService->getAdsByLoggedUser($this->loggedUser);
-                require __DIR__ . '/../Views/pages/MyAdsdivShowsAds.php';
+                require __DIR__ . '/../Views/MyAdsPage/MyAdsdivShowsAds.php';
             } else {
                 echo "No ads";
             }
-            $this->deleteAdFunctionality();
-            //$this->markPostAsSoldFunctionality();
         }
 
-    }
-    private function deleteAdFunctionality(): void
-    {
-        if(isset($_POST["btnDeleteAd"])){
-           // echo $_POST["adIdHidden"];
-        }
-    }
-    private function markPostAsSoldFunctionality():void{
-        if (isset($_POST["btnMarkAsSold"])){
-            //echo $_POST["adIdHidden"];
-        }
     }
 }
