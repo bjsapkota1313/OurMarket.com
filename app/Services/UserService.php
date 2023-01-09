@@ -13,9 +13,9 @@ class UserService
         $this->repository = new UserRepository();
     }
 
-    public function getUserByEmail($email, $password)
+    public function verifyAndGetUser($email, $password)
     {
-         return $this->repository->loginByEmail($email,$password);
+         return $this->repository->verifyAndGetUser($email,$password);
     }
 
     /**

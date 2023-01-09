@@ -12,44 +12,32 @@ class AdsController
         $this->adService = new AdService();
     }
 
-    public function index()
+    public function index(): void
     {
-            $this->sendHeaders();
+        $this->sendHeaders();
 
         // Respond to a POST request to /api/article
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
             $responseData = array();
             $adDetails = json_decode($_POST['adDetails'], true);
-            $username = $adDetails['loggedUserName'];
-            $productName = $adDetails['productName'];
+            $username = htmlspecialchars($adDetails['loggedUserName']);
+            $productName = htmlspecialchars($adDetails['productName']);
+            $productPrice=htmlspecialchars($adDetails['price']);
+            $productDescription=htmlspecialchars($adDetails['productDescription']);
             // Process the image file
             $image = $_FILES['image'];
-            if ($image['error'] == UPLOAD_ERR_OK) {
-                $imageName = $image['name'];
-                $imageType = $image['type'];
-                $imageTempName = $image['tmp_name'];
+            $responseData = $this->processImage($image);
 
-                // Validate the image file
-                $allowedTypes = ['image/jpeg', 'image/png'];
-                if (!in_array($imageType, $allowedTypes)) {
-                    $responseData = array(
-                        "success" => true,
-                        "message" => "This type of image file is not accepted"
-                    );
-                } else {
-                    $targetDirectory = "img/";
-                    $imageExtension = explode('.', $imageName);
-                    $newImageName = $productName . "-" . date("Y-m-d") . "-" . $username . "." . end($imageExtension);
-                    //when everything is correct
-                    $this->adService->postNewAd($this->createAd($adDetails['productName'], $adDetails['price'], $adDetails['productDescription'], "/" . $targetDirectory . $newImageName, $adDetails['loggedUserId']));
-                    move_uploaded_file($imageTempName, $targetDirectory . $imageName);
-                    rename($targetDirectory . $imageName, $targetDirectory . $newImageName);
-                    $responseData = array(
-                        "success" => true,
-                        "message" => "The form data was processed successfully"
-                    );
-                }
+            if ($responseData['success']) {
+                $imageTempName = $image['tmp_name'];
+                $imageName = $image['name'];
+                $targetDirectory = "img/";
+                $imageExtension = explode('.', $imageName);
+                $newImageName = "OurMarket". "-" . date("Y-m-d") ."-".time(). "-" . $username . "." . end($imageExtension); // making each file unique by renaming it
+                //when everything is correct
+                $this->adService->postNewAd($this->createAd($productName, $productPrice,$productDescription , "/" . $targetDirectory . $newImageName, $adDetails['loggedUserId']));
+                move_uploaded_file($imageTempName, $targetDirectory . $imageName);
+                rename($targetDirectory . $imageName, $targetDirectory . $newImageName);
             } else {
                 $responseData = array(
                     "success" => false,
@@ -62,29 +50,57 @@ class AdsController
 
             // Send the response message as the body of the HTTP response
             echo $responseJson;
-
         }
 
     }
 
-    public function updateAdRequest(): void
+    public function handleAdEditRequest(): void
     {
-        $responseData="";
+        $this->sendHeaders();
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $responseData = array();
+            $editedAdDetails = json_decode($_POST['editedAdDetails'], true);
+            $productName = htmlspecialchars($editedAdDetails['productName']);
+            $productPrice = htmlspecialchars($editedAdDetails['price']);
+            $productDescription = htmlspecialchars($editedAdDetails['productDescription']);
+            $adID = htmlspecialchars($editedAdDetails["adId"]);
+            // Process the image file
+            $image = $_FILES['inputImage'];
+            // Validate the image file
+            $responseData=$this->processImage($image);
+            if ($responseData['success']) {
+                error_clear_last();
+                $this->adService->editAdWithNewDetails($image,$productName,$productDescription,$productPrice,$adID);
+                $responseData=$this->getResponseMessage(error_get_last());
+
+            } else {
+                $responseData = array(
+                    "success" => false,
+                    "message" => "Something went Wrong while Processing image"
+                );
+            }
+            echo json_encode($responseData);
+        }
+
+    }
+
+    public function operateAdRequest(): void
+    {
+        $responseData = "";
         $this->sendHeaders();
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $body = file_get_contents('php://input');
             $data = json_decode($body);
-            if($data->OperationType=="ChangeStatusOfAd"){
+            if (htmlspecialchars($data->OperationType) == "ChangeStatusOfAd") {
                 error_clear_last();
-                $this->adService->updateStatusOfAd(Status::from($data->adStatus),$data->adID);
+                $this->adService->markAdAsSold(htmlspecialchars($data->adID));
                 // checking if are triggered or not
-                $responseData=$this->getResponseMessage(error_get_last()); // setting error according to error
+                $responseData = $this->getResponseMessage(error_get_last()); // setting error according to error
 
-            }
-            else if ($data->OperationType== "DeleteAd"){
+            } else if (htmlspecialchars($data->OperationType) == "DeleteAd") {
                 error_clear_last();
-                $this->adService->deleteAd($data->adID,$data->imageURI);
-               $responseData=$this->getResponseMessage(error_get_last()); // setting error according to error
+                $this->adService->deleteAd(htmlspecialchars($data->adID), htmlspecialchars($data->imageURI));
+                $responseData = $this->getResponseMessage(error_get_last()); // setting error according to error
             }
             echo json_encode($responseData);
         }
@@ -97,7 +113,7 @@ class AdsController
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $body = file_get_contents('php://input');
             $data = json_decode($body);
-            $loggedUserId = $data->loggedUserId;
+            $loggedUserId = htmlspecialchars($data->loggedUserId);
             $user = new User();
             $user->setId($loggedUserId);
             $ads = $this->adService->getAdsByLoggedUser($user);//already had method so just making user object and setting id only
@@ -115,15 +131,16 @@ class AdsController
         $ad->setImageUri($imageURI);
         return $ad;
     }
-    private function getResponseMessage($error):mixed{
-        if($error!==null){
-            $errorMessage=$error['message'];
+
+    private function getResponseMessage($error): mixed
+    {
+        if ($error !== null) {
+            $errorMessage = $error['message'];
             $responseData = array(
                 "success" => false,
                 "message" => "$errorMessage"
             );
-        }
-        else{
+        } else {
             $responseData = array(
                 "success" => true,
                 "message" => ""
@@ -131,6 +148,33 @@ class AdsController
         }
         return $responseData;
     }
+
+    function processImage($image)
+    {
+        if ($image['error'] == UPLOAD_ERR_OK) {
+            $imageType = $image['type'];
+
+            // Validate the image file
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+            if (!in_array($imageType, $allowedTypes)) {
+                return array(
+                    "success" => false,
+                    "message" => "This type of image file are not accepted"
+                );
+            } else {
+                return array(
+                    "success" => true,
+                    "message" => ""
+                );
+            }
+        } else {
+            return array(
+                "success" => false,
+                "message" => "Something went Wrong while uploading image"
+            );
+        }
+    }
+
 
     private function sendHeaders(): void
     {

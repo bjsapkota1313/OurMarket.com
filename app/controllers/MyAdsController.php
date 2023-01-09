@@ -14,8 +14,9 @@ class MyAdsController
     public function displayMyAdsPage():void {
         $displayMessage=$this->displayInfo();
         require __DIR__ . '/../Views/MyAdsPage/MyAds.php';
-        $this->loginAndSignout();
         $this->showAds();
+        include_once __DIR__.'/../Views/Footer.php';
+        $this->loginAndSignout();
 
     }
     private function displayInfo() :string{
@@ -51,11 +52,11 @@ class MyAdsController
                 </script>';
         }
         if (isset($_POST["btnSignOut"])) {
-            //session_destroy();
             unset($_SESSION["loggedUser"]);
             echo '<script>
               enableLogin();
               hidePostNewAd();
+              loginMessageForSignOut();
               clearScreen();
                 </script>';
         }
@@ -73,6 +74,7 @@ class MyAdsController
         if (!is_null($this->loggedUser)) {
             if (!is_null($this->adService->getAdsByLoggedUser($this->loggedUser))) {
                 $loggedUserAds = $this->adService->getAdsByLoggedUser($this->loggedUser);
+                require __DIR__ . '/../Views/MyAdsPage/EditAdsModal.php';
                 require __DIR__ . '/../Views/MyAdsPage/MyAdsdivShowsAds.php';
             } else {
                 echo "No ads";

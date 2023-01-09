@@ -24,5 +24,12 @@ class AdService
     public function deleteAd($adID, $imageFile){
         $this->adRepository->deleteAd($adID, $imageFile);
     }
+    public function markAdAsSold($adId){
+        //Marking as sold as did not want to show the status of ad passing as string from javascript
+        $this->updateStatusOfAd(status::Sold,$adId);
+    }
+    public function editAdWithNewDetails($newImage,$productName,$description,$price,$adID){
+        $this->adRepository->editAd($newImage,$productName,$description,$price,$adID);
+    }
 
 }

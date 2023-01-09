@@ -16,7 +16,7 @@ class LoginController
         if (isset($_POST["btnLogin"])) {
             $email = htmlspecialchars($_POST["email"]);
             $password = htmlspecialchars($_POST["password"]);
-            $loggingUser = $this->userService->getUserByEmail($email, $password);
+            $loggingUser = $this->userService->verifyAndGetUser($email, $password);
             if (is_null($loggingUser)) {
                 echo ' <Script>
 
@@ -32,7 +32,7 @@ class LoginController
     </Script>';
             } else {
                 $_SESSION["loggedUser"] = $loggingUser;
-                echo "<script>location.href = '/home'</script>";
+                echo "<script>location.href = '/home/myAds'</script>";
             }
         }
 

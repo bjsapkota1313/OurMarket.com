@@ -1,0 +1,5 @@
+
+R	php:S1808"=Move this open curly brace to the beginning of the next line.(ˆÜ˜
+P	php:S1808"6Put exactly one space after comma separated arguments.(«¾İ­øÿÿÿÿ
+j	php:S1779"VReplace all non line feed end of line characters in this file "UserService.php" by LF.8×Ñ£ê×0
+m	php:S4833"QReplace "require_once" with namespace import mechanism through the "use" keyword.(®§İ…8§çã Õ0

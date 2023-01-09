@@ -68,12 +68,14 @@ class AdRepository extends Repository
             if ($stmt->execute()) {
                 $rows_updated = $stmt->rowCount();
                 if ($rows_updated <= 0) {
-                   trigger_error(" Ad couldn't be Updated Please,Try again", E_USER_ERROR);
+                    trigger_error(" Ad couldn't be Updated Please,Try again", E_USER_ERROR);
 
                 }
+            } else {
+                trigger_error(" Ad couldn't be Updated", E_USER_ERROR);
             }
-        } catch (PDOException | Exception $e) {
-            trigger_error("An error occurred: " , E_USER_ERROR);
+        } catch (PDOException|Exception $e) {
+            trigger_error("An error occurred: ", E_USER_ERROR);
         }
 
     }
@@ -87,13 +89,15 @@ class AdRepository extends Repository
                 $rows_updated = $stmt->rowCount();
                 if ($rows_updated > 0) {
                     // delete the file if the database query was successful
-                    $imageFile=__DIR__.'/../public'.$imageURI;
+                    $imageFile = __DIR__ . '/../public' . $imageURI;
                     unlink($imageFile);
                 } else {
                     trigger_error(" Ad couldn't be deleted", E_USER_ERROR);
                 }
+            } else {
+                trigger_error(" Ad couldn't be Deleted", E_USER_ERROR);
             }
-        } catch (PDOException| Exception   $e) {
+        } catch (PDOException|Exception   $e) {
             trigger_error("An error occurred: " . $e->getMessage(), E_USER_ERROR);
         }
     }
@@ -139,4 +143,72 @@ class AdRepository extends Repository
             echo $e;
         }
     }
+
+    private function getCurrentImageUriByAdId($adId)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT imageURI FROM Ads WHERE id= :adId");
+            $stmt->bindValue(":adId", $adId);
+            $stmt->execute();
+            if ($stmt->rowCount() == 1) {
+                // Statement returned exactly one row
+                $result = $stmt->fetch();
+                $imageURI = $result['imageURI'];
+            } else {
+                // Statement returned no rows or more than one row
+                throw new PDOException("someTHING WENT WRONG");
+            }
+            return $imageURI;
+        } catch (PDOException $e) {
+            trigger_error("An error occurred: " . $e->getMessage(), E_USER_ERROR);
+        }
+    }
+
+    public function editAd($newImage, $productName, $description, $price, $adID)
+    {
+        try {
+            $dbStoredName;
+            if (!isset($dbStoredName)) {
+                $dbStoredName = $this->getCurrentImageUriByAdId($adID);
+            }
+            $storingImageUri = $this->editImageFile($dbStoredName, $newImage);
+            if (is_null($storingImageUri)) {
+                trigger_error("Something went wrong while updating image please Try again!", E_USER_ERROR);
+            }
+            $stmt = $this->connection->prepare("UPDATE Ads SET productName = :productName ,description = :description ,price = :price ,imageURI =:imageURI WHERE id = :id");
+            $stmt->bindValue(":productName", $productName);
+            $stmt->bindValue(":description", $description);
+            $stmt->bindValue(":price", $price);
+            $stmt->bindValue(":id", $adID);
+            $stmt->bindValue(":imageURI", $storingImageUri);
+            $stmt->execute();
+
+        } catch (PDOException|Exception $e) {
+            trigger_error("An error occurred: " . $e->getMessage(), E_USER_ERROR);
+        }
+    }
+
+    private function editImageFile($dbStoredImageName, $newImage)
+    {
+        try {
+            $imageTempName = $newImage['tmp_name'];
+            $newImageName = $newImage['name'];
+            $newImageArray = explode('.', $newImageName);
+            $newImageExtension = end($newImageArray);
+            $storedImageName = explode('.', $dbStoredImageName);
+            $dbStoredNameWithoutExtension = reset($storedImageName);
+            $targetDirectory = __DIR__ . '/../public';
+            if (unlink($targetDirectory . $dbStoredImageName)) {
+                // deleting the file and renaming the new received image and returning it
+                move_uploaded_file($imageTempName, $targetDirectory . "/img/" . $newImageName);
+                $newFileName = $dbStoredNameWithoutExtension . '.' . $newImageExtension;
+                rename($targetDirectory . "/img/" . $newImageName, $targetDirectory . $newFileName);
+                return $newFileName;
+            }
+            return null;
+        } catch (Exception $e) {
+            trigger_error("An error occurred: " . $e->getMessage(), E_USER_ERROR);
+        }
+    }
+
 }

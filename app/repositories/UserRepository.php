@@ -4,7 +4,7 @@ include_once __DIR__ . '/Repository.php';
 
 class UserRepository extends Repository
 {
-    function loginByEmail($email, $enteredPassword)
+    function verifyAndGetUser($email, $enteredPassword)
     {
         try {
         $user = null;

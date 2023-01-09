@@ -18,12 +18,6 @@ class Router
                 $controller = new LoginController();
                 $controller->displayLoginPage();
                 break;
-
-            case 'home/about':
-                require __DIR__ . '/controllers/homecontroller.php';
-                $controller = new HomeController();
-                $controller->about();
-                break;
             case 'home/myAds':
                 require __DIR__ . '/../controllers/MyAdsController.php';
                 $controller = new MyAdsController();
@@ -42,7 +36,12 @@ class Router
             case'api/updateAd';
                 require __DIR__ . '/../API/Controllers/AdsController.php';
                 $controller = new AdsController();
-                $controller->updateAdRequest();
+                $controller->operateAdRequest();
+                break;
+            case 'api/editAd';
+                require __DIR__ . '/../API/Controllers/AdsController.php';
+                $controller = new AdsController();
+                $controller->handleAdEditRequest();
                 break;
             default:
                 http_response_code(404);

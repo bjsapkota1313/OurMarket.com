@@ -1,0 +1,24 @@
+
+W	php:S1808"=Move this open curly brace to the beginning of the next line.(äèÆ¹ıÿÿÿÿ
+R	php:S1808"=Move this open curly brace to the beginning of the next line.(İãÎĞ
+W	php:S1808"=Move this open curly brace to the beginning of the next line.(—¾•ÿÿÿÿÿ
+R	php:S1808"=Move this open curly brace to the beginning of the next line.(»ûåÃ
+R	php:S1808"=Move this open curly brace to the beginning of the next line.(¿ÌÇô
+R	php:S1808"=Move this open curly brace to the beginning of the next line.(½˜Ø–
+R	php:S1808"=Move this open curly brace to the beginning of the next line.(‡·¨«
+d	php:S1808"JPut one space between the closing parenthesis and the opening curly brace.(äèÆ¹ıÿÿÿÿ
+D	php:S1808"/Remove all space after the opening parenthesis.(ÑŞÖì
+_	php:S1808"JPut one space between the closing parenthesis and the opening curly brace.(İãÎĞ
+d	php:S1808"JPut one space between the closing parenthesis and the opening curly brace.(—¾•ÿÿÿÿÿ
+_	php:S1808"JPut one space between the closing parenthesis and the opening curly brace.(»ûåÃ
+_	php:S1808"JPut one space between the closing parenthesis and the opening curly brace.(¿ÌÇô
+_	php:S1808"JPut one space between the closing parenthesis and the opening curly brace.(½˜Ø–
+_	php:S1808"JPut one space between the closing parenthesis and the opening curly brace.(‡·¨«
+K	php:S1808"6Put exactly one space after comma separated arguments.(Ñ¨¢‡
+R	php:S1808"6Put exactly one space after comma separated arguments.(‡·¨«8Ü‰ê¥×0
+Q	php:S1808 "6Put exactly one space after comma separated arguments.(Äí¦8ÙİÓº×0
+h	php:S1779"TReplace all non line feed end of line characters in this file "AdService.php" by LF.8’™Í×0
+@	php:S2003"&Replace "require" with "require_once".(Ëš¾îûÿÿÿÿ
+f	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(Ëš¾îûÿÿÿÿ
+k	php:S4833"QReplace "require_once" with namespace import mechanism through the "use" keyword.(ìƒÀúÿÿÿÿ
+k	php:S4833"QReplace "require_once" with namespace import mechanism through the "use" keyword.(ùé‚Úÿÿÿÿÿ

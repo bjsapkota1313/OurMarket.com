@@ -13,17 +13,15 @@ class HomeController
     }
     public function displayHomePage()
     {
-        $ads=$this->adService->getAllAvailableAds(Status::Available); // only showing avaialble ads
+        $ads=$this->adService->getAllAvailableAds(Status::Available); // only showing available ads
         require __DIR__ . "/../Views/HomePage/Home.php";
-        $this->loginAndLogout();
-        if(is_null($ads)){
-            echo"<H2> No products are in sale</H2>";
-        }
+        include_once __DIR__.'/../Views/Footer.php';
+        $this->showAvailableAds($ads);
+        $this->loginAndSignout();
     }
-    private function loginAndLogout(): void
+    private function loginAndSignout(): void
     {
         if (isset($_SESSION["loggedUser"])) {
-           // $loggedUser = unserialize(serialize($_SESSION["loggedUser"]));
             echo '<script>             
                 disableLoginButton();
                 </script>';
@@ -34,6 +32,14 @@ class HomeController
             echo '<script>
               enableLogin();
                 </script>';
+        }
+    }
+    private function showAvailableAds($ads) :void{
+        if(is_null($ads)){
+            echo '<script>displayInformativeMessage()</script>';
+        }
+        else{
+            require __DIR__.'/../Views/HomePage/ShowAvailableAds.php';
         }
     }
 

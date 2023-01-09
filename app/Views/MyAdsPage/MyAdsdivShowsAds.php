@@ -1,4 +1,4 @@
-<div class="container ml-2" id="myAdsContainer">
+<div class="container ml-2 " id="myAdsContainer">
     <?php
     foreach ($loggedUserAds
              as $ad) {
@@ -11,8 +11,8 @@
                     </div>
                     <div class="col-md-8 col-xl-8 d-flex flex-column justify-content-around">
                         <div class="card-body">
-                            <h5 class="card-title"><?= $ad->getProductName() ?></h5>
-                            <p class="card-text"><?= $ad->getDescription() ?></p>
+                            <h5 class="card-title"><?= htmlspecialchars_decode($ad->getProductName()) ?></h5>
+                            <p class="card-text"><?= htmlspecialchars_decode($ad->getDescription()) ?></p>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item"><strong>Price:</strong>
                                     €<?= number_format($ad->getPrice(), 2, '.') ?></li>
@@ -25,7 +25,7 @@
                             <button class="btn btn-primary mx-2"
                                     onclick="btnMarkAsSoldClicked(<?= $ad->getId() ?>)">Mark As Sold
                             </button>
-                            <button class="btn btn-secondary mx-2">
+                            <button class="btn btn-secondary mx-2" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editAdButtonClicked('<?= $ad->getId() ?>','<?= $ad->getImageUri() ?>','<?= $ad->getProductName() ?>','<?= addslashes($ad->getDescription()) ?>','<?= $ad->getPrice()?>')" >
                             <i class="fa-solid fa-file-pen"></i> Edit</button>
                             <button class="btn btn-danger mx-2" id="btnDeleteAd" name="btnDeleteAd"
                                     onclick="btnDeleteAdClicked('<?= $ad->getId() ?>','<?= $ad->getImageUri() ?>')">
@@ -45,8 +45,8 @@
                     </div>
                     <div class="col-md-8 col-xl-8 d-flex flex-column justify-content-around">
                         <div class="card-body">
-                            <h5 class="card-title"><?= $ad->getProductName() ?></h5>
-                            <p class="card-text"><?= $ad->getDescription() ?></p>
+                            <h5 class="card-title"><?= htmlspecialchars_decode($ad->getProductName()) ?></h5>
+                            <p class="card-text"><?= htmlspecialchars_decode($ad->getDescription()) ?></p>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item"><strong>Price:</strong>
                                     €<?= number_format($ad->getPrice(), 2, '.') ?></li>

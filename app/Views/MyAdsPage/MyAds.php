@@ -82,7 +82,7 @@
 <div>
     <?php if (!is_null($this->loggedUser)) { ?>
         <label id="hiddenLoggedUserId" hidden><?= $this->loggedUser->getId() ?></label>
-    <label id="loggedUserName" hidden><?= $this->loggedUser->getFirstName() ?></label><?php } ?>
+        <label id="loggedUserName" hidden><?= $this->loggedUser->getFirstName() ?></label><?php } ?>
 </div>
 <!-- The Modal -->
 <div class="modal fade" id="myModal">
@@ -92,7 +92,8 @@
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title">Add New Post</h4>
-                    <button id="close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button id="close" type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                 </div>
 
                 <!-- Modal body -->
@@ -104,7 +105,9 @@
                     </div>
                     <div class="form-group">
                         <label for="image"><strong>Image</strong></label><br>
-                        <input type="file" class="form-control-file" id="image" accept="image/png, image/jpeg" ondragover="allowDrop(event)" ondrop="dropFile(event)" required style="   .dragover {border: 2px dashed #000;}">
+                        <input type="file" class="form-control-file" id="image" accept="image/png, image/jpeg,image/jpg"
+                               ondragover="allowDrop(event)" ondrop="dropFile(event)" required
+                               style="   .dragover {border: 2px dashed #000;}">
                     </div>
                     <div class="form-group">
                         <label for="price"><strong>Price</strong></label>
@@ -114,7 +117,8 @@
                     <div class="form-group">
                         <label for="productDescription"><strong>Product Description</strong></label>
                         <textarea class="form-control" id="productDescription" rows="3"
-                                  placeholder="Describe about your product like how long it is used for,what's the brand of the product" required ></textarea>
+                                  placeholder="Describe about your product like how long it is used for,what's the brand of the product"
+                                  required></textarea>
                     </div>
                 </div>
                 <!-- Modal footer -->
@@ -122,7 +126,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                             onclick="resetPostNewAddForm()">Cancel
                     </button>
-                    <button type="submit" class="btn btn-success" id="btnPostNewAdd" onclick="postNewAdd()" >Post
+                    <button type="submit" class="btn btn-success" id="btnPostNewAdd" onclick="postNewAdd()">Post
                     </button>
                 </div>
             </form>
@@ -130,11 +134,11 @@
     </div>
 </div>
 
-<script src="/Javascripts/Ad.js" ></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+
+
+
+
+
+
 
 
