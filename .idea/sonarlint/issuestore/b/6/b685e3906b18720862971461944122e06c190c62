@@ -1,0 +1,14 @@
+
+I	php:S1481"4Remove this unused "$displayMessage" local variable.(üç¢­
+@	php:S2003"&Replace "require" with "require_once".(Ó­ÌÏıÿÿÿÿ
+@	php:S2003"&Replace "require" with "require_once".(±ÿ‰ÿÿÿÿÿ
+;	php:S2003"&Replace "require" with "require_once".(ç©µé
+@	php:S2003"&Replace "require" with "require_once".(›è±×úÿÿÿÿ
+;	php:S2003"&Replace "require" with "require_once".(½ˆØÈ
+;	php:S2003"&Replace "require" with "require_once".(Şş”¾
+f	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(Ó­ÌÏıÿÿÿÿ
+f	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(±ÿ‰ÿÿÿÿÿ
+a	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(ç©µé
+f	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(›è±×úÿÿÿÿ
+a	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(½ˆØÈ
+a	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(Şş”¾

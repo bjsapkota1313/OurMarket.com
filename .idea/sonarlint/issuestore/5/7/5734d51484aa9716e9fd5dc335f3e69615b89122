@@ -1,0 +1,7 @@
+
+_php:S103$"KSplit this 170 characters long line (which is greater than 120 authorized).(Ê¾Ÿì
+dphp:S103&"KSplit this 179 characters long line (which is greater than 120 authorized).(Ìü›şÿÿÿÿ
+@	php:S2003"&Replace "require" with "require_once".(×¦èÿÿÿÿÿ
+f	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(×¦èÿÿÿÿÿ
+f	php:S4833"QReplace "require_once" with namespace import mechanism through the "use" keyword.(âßÀğ
+k	php:S4833"QReplace "require_once" with namespace import mechanism through the "use" keyword.(ÎşÁ¥ùÿÿÿÿ
