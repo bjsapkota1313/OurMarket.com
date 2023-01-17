@@ -82,9 +82,11 @@ body {
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
 }
-h1{
-    color:white;
+
+h1 {
+    color: white;
 }
-#labelRememberMe{
-    color:white;
+
+#labelRememberMe {
+    color: white;
 }

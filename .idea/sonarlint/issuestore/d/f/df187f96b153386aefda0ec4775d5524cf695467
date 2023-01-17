@@ -1,4 +1,0 @@
-
-d	php:S1779"PReplace all non line feed end of line characters in this file "index.php" by LF.8¤ÿÏä×0
-@	php:S2003"&Replace "require" with "require_once".(áæ›‘øÿÿÿÿ
-f	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(áæ›‘øÿÿÿÿ

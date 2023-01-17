@@ -1,20 +1,22 @@
 
-U	php:S1131"@Remove the useless trailing whitespaces at the end of this line.( «Ü®
-R	php:S1808%"=Move this open curly brace to the beginning of the next line.(Ë×ÁÖ
-[	php:S1808)"FMove this "else" to the same line as the previous closing curly brace.(á¢–¬
-d	php:S1808&"JPut one space between the closing parenthesis and the opening curly brace.(èöñªıÿÿÿÿ
-^	php:S1808&"DPut one space between this "if" keyword and the opening parenthesis.(èöñªıÿÿÿÿ
-[	php:S1808)"FPut one space between this "else" keyword and the opening curly brace.(á¢–¬
-m	php:S1779"YReplace all non line feed end of line characters in this file "HomeController.php" by LF.8¯ØÄ¡×0
+R	php:S1808!"=Move this open curly brace to the beginning of the next line.(Ë×ÁÖ
+[	php:S1808%"FMove this "else" to the same line as the previous closing curly brace.(á¢–¬
+d	php:S1808""JPut one space between the closing parenthesis and the opening curly brace.(èöñªıÿÿÿÿ
+^	php:S1808""DPut one space between this "if" keyword and the opening parenthesis.(èöñªıÿÿÿÿ
+[	php:S1808%"FPut one space between this "else" keyword and the opening curly brace.(á¢–¬
 @	php:S2003"&Replace "require" with "require_once".(Ó­ÌÏıÿÿÿÿ
 @	php:S2003"&Replace "require" with "require_once".(±ÿ‰ÿÿÿÿÿ
 ;	php:S2003"&Replace "require" with "require_once".(ç©µé
-@	php:S2003"&Replace "require" with "require_once".(‡è™Æüÿÿÿÿ
-@	php:S2003*"&Replace "require" with "require_once".(ğè•‰ùÿÿÿÿ
-8php:S125"Remove this commented out code.(ŞÇûÿÿÿÿ
+@	php:S2003"&Replace "require" with "require_once".(›è±×úÿÿÿÿ
+@	php:S2003"&Replace "require" with "require_once".(‡è™Æüÿÿÿÿ
+;	php:S2003"&Replace "require" with "require_once".(Şş”¾
+@	php:S2003#"&Replace "require" with "require_once".(¦Šá×şÿÿÿÿ
+@	php:S2003&"&Replace "require" with "require_once".(ğè•‰ùÿÿÿÿ
 f	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(Ó­ÌÏıÿÿÿÿ
 f	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(±ÿ‰ÿÿÿÿÿ
 a	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(ç©µé
-f	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(‡è™Æüÿÿÿÿ
-k	php:S4833"QReplace "include_once" with namespace import mechanism through the "use" keyword.(úŸ°êûÿÿÿÿ
-f	php:S4833*"LReplace "require" with namespace import mechanism through the "use" keyword.(ğè•‰ùÿÿÿÿ
+f	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(›è±×úÿÿÿÿ
+f	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(‡è™Æüÿÿÿÿ
+a	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(Şş”¾
+f	php:S4833#"LReplace "require" with namespace import mechanism through the "use" keyword.(¦Šá×şÿÿÿÿ
+f	php:S4833&"LReplace "require" with namespace import mechanism through the "use" keyword.(ğè•‰ùÿÿÿÿ

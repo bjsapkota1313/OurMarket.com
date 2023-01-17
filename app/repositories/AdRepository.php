@@ -15,11 +15,11 @@ class AdRepository extends Repository
         $this->userRepo = new UserRepository();
     }
 
-    public function getAllAvailableAds(Status $status)
+    public function getAllAdsByStatus(Status $status)
     {
         try {
 
-            $stmt = $this->connection->prepare("SELECT id,productName,description,postedDate,price,imageURI,userID,status From Ads WHERE status=:status");
+            $stmt = $this->connection->prepare("SELECT id,productName,description,postedDate,price,imageURI,userID,status From Ads WHERE status=:status ORDER BY postedDate DESC");
             $label = $status->label();
             $stmt->bindParam(":status", $label);
             if ($this->checkAdinDB($stmt)) {
@@ -27,7 +27,7 @@ class AdRepository extends Repository
                 $result = $stmt->fetchAll();
                 $ads = array();
                 foreach ($result as $row) {
-                    $ads[] = $this->readOneAd($row);
+                    $ads[] = $this->MakeAnAD($row);
                 }
                 return $ads;
             }
@@ -36,11 +36,23 @@ class AdRepository extends Repository
             echo $e;
         }
     }
+    public function getAdByID($adId): Ad
+    {
+        try {
 
+            $stmt = $this->connection->prepare("SELECT id,productName,description,postedDate,price,imageURI,userID,status From Ads WHERE id= :adId");
+            $stmt->bindValue(":adId", $adId);
+            $stmt->execute();
+            $row = $stmt->fetch();
+            return $this->makeAnAd($row);
+        } catch (PDOException  $e) {
+            echo $e;
+        }
+    }
     public function getAdsByLoggedUser($loggedUser)
     {
         try {
-            $stmt = $this->connection->prepare("SELECT id,productName,description,postedDate,price,imageURI,userID,status From Ads WHERE UserID= :userID");
+            $stmt = $this->connection->prepare("SELECT id,productName,description,postedDate,price,imageURI,userID,status From Ads WHERE UserID= :userID ORDER BY postedDate DESC"); // latest post
             $id = $loggedUser->getId();
             $stmt->bindParam(":userID", $id);
             if ($this->checkAdinDB($stmt)) {
@@ -48,7 +60,7 @@ class AdRepository extends Repository
                 $result = $stmt->fetchAll();
                 $ads = array();
                 foreach ($result as $row) {
-                    $ads[] = $this->readOneAd($row);
+                    $ads[] = $this->MakeAnAD($row);
                 }
                 return $ads;
             }
@@ -69,15 +81,13 @@ class AdRepository extends Repository
                 $rows_updated = $stmt->rowCount();
                 if ($rows_updated <= 0) {
                     trigger_error(" Ad couldn't be Updated Please,Try again", E_USER_ERROR);
-
                 }
             } else {
                 trigger_error(" Ad couldn't be Updated", E_USER_ERROR);
             }
-        } catch (PDOException|Exception $e) {
+        } catch (PDOException | Exception $e) {
             trigger_error("An error occurred: ", E_USER_ERROR);
         }
-
     }
 
     public function deleteAd($adID, $imageURI)
@@ -97,12 +107,12 @@ class AdRepository extends Repository
             } else {
                 trigger_error(" Ad couldn't be Deleted", E_USER_ERROR);
             }
-        } catch (PDOException|Exception   $e) {
+        } catch (PDOException | Exception   $e) {
             trigger_error("An error occurred: " . $e->getMessage(), E_USER_ERROR);
         }
     }
 
-    private function readOneAd($dBRow): Ad
+    private function makeAnAd($dBRow): Ad
     {
         $ad = new Ad();
         $ad->setId($dBRow["id"]);
@@ -115,7 +125,6 @@ class AdRepository extends Repository
         $ad->setUser($this->userRepo->getUserById($dBRow["userID"]));
         return $ad;
     }
-
     private function checkAdinDB($stmt): bool
     {
         try {
@@ -182,8 +191,24 @@ class AdRepository extends Repository
             $stmt->bindValue(":id", $adID);
             $stmt->bindValue(":imageURI", $storingImageUri);
             $stmt->execute();
-
-        } catch (PDOException|Exception $e) {
+        } catch (PDOException | Exception $e) {
+            trigger_error("An error occurred: " . $e->getMessage(), E_USER_ERROR);
+        }
+    }
+    public function searchAdsByProductName($productName)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT id,productName,description,postedDate,price,imageURI,userID,status FROM Ads WHERE `productName` LIKE :productName AND status =:status");
+            $stmt->bindValue(":productName", '%' . $productName . '%');
+            $stmt->bindValue(":status", Status::Available->label()); // getting only available ads otherwise user can search  see every ad
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            $ads = array();
+            foreach ($result as $row) {
+                $ads[] = $this->MakeAnAD($row);
+            }
+            return $ads;
+        } catch (PDOException | Exception $e) {
             trigger_error("An error occurred: " . $e->getMessage(), E_USER_ERROR);
         }
     }
@@ -200,9 +225,8 @@ class AdRepository extends Repository
             $targetDirectory = __DIR__ . '/../public';
             if (unlink($targetDirectory . $dbStoredImageName)) {
                 // deleting the file and renaming the new received image and returning it
-                move_uploaded_file($imageTempName, $targetDirectory . "/img/" . $newImageName);
                 $newFileName = $dbStoredNameWithoutExtension . '.' . $newImageExtension;
-                rename($targetDirectory . "/img/" . $newImageName, $targetDirectory . $newFileName);
+                move_uploaded_file($imageTempName, $targetDirectory . $newFileName);
                 return $newFileName;
             }
             return null;
@@ -210,5 +234,4 @@ class AdRepository extends Repository
             trigger_error("An error occurred: " . $e->getMessage(), E_USER_ERROR);
         }
     }
-
 }

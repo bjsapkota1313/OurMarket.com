@@ -15,7 +15,7 @@ class Ad implements jsonSerializable
 
     public function __construct()
     {
-        $this->user =new User();
+        $this->user = new User();
     }
 
     /**
@@ -145,9 +145,12 @@ class Ad implements jsonSerializable
     {
         $this->price = $price;
     }
-    public function jsonSerialize() :mixed
+    public function jsonSerialize(): mixed
     {
         return get_object_vars($this);
     }
-
+    public function __equals($other): bool
+    {
+        return $this->id === $other->id;
+    }
 }

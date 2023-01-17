@@ -1,4 +1,4 @@
 
 W	php:S1808	"=Move this open curly brace to the beginning of the next line.(™à‚žýÿÿÿÿ
 W	php:S1808"=Move this open curly brace to the beginning of the next line.(–ÄÏ§ùÿÿÿÿ
-e	php:S1779"QReplace all non line feed end of line characters in this file "Status.php" by LF.8¾Ñ’ÁÖ0
+^	php:S1779"QReplace all non line feed end of line characters in this file "Status.php" by LF.

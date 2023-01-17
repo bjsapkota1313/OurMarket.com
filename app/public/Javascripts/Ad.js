@@ -5,7 +5,7 @@ function disableLoginButton() {
     p.innerHTML = "Logged";
     const loginLinkId = loginLink.getAttribute("id");
 
-// Set the id of the p element to be the same as the loginLink element
+    // Set the id of the p element to be the same as the loginLink element
     p.setAttribute("id", loginLinkId);
     loginLink.parentNode.replaceChild(p, loginLink);
     document.getElementById("signOut").disabled = false;
@@ -47,8 +47,8 @@ function showPostNewAd() {
 function postNewAdd() {
     // Prevent the default form submission behavior
     event.preventDefault();
-    const inputLoggedUserId = escapeHtml(document.getElementById("hiddenLoggedUserId").textContent);
-    const inputLoggedUserName = escapeHtml(document.getElementById("loggedUserName").textContent);
+    const inputLoggedUserId = escapeHtml(document.getElementById("hiddenLoggedUserId").value);
+    const inputLoggedUserName = escapeHtml(document.getElementById("loggedUserName").value);
     const inputProductName = escapeHtml(document.getElementById("productName").value);
     const inputPrice = escapeHtml(document.getElementById("price").value);
     const inputProductDescription = escapeHtml(document.getElementById("productDescription").value);
@@ -83,6 +83,7 @@ function sendRequestForInsertingAd(formData) {
         .then(function (responseData) {
             if (responseData.success) {
                 document.getElementById("close").click();
+                resetPostNewAddForm();  // clearing the fields of the form
                 loadAdsOfLoggedUser();
             } else {
                 alert(responseData.message);
@@ -91,8 +92,8 @@ function sendRequestForInsertingAd(formData) {
 }
 
 function loadAdsOfLoggedUser() {
-    const inputLoggedUserId = escapeHtml(document.getElementById("hiddenLoggedUserId").textContent);
-    let data = {loggedUserId: inputLoggedUserId}
+    const inputLoggedUserId = escapeHtml(document.getElementById("hiddenLoggedUserId").value);
+    let data = { loggedUserId: inputLoggedUserId }
     // Send a POST request to the server with logged user and promising the ads as response of logged user
     fetch('http://localhost/api/adsbyloggeduser', {
         method: 'POST',
@@ -135,9 +136,21 @@ function validateForm(productName, price, description, image) {
         alert('Please select an image');
         return false;
     }
+    else if (!checkUploadedFile(image)) {
+        return false;
+    }
     return true;
 }
+function checkUploadedFile(image) {
+    var fileType = image.type;
+    var validImageTypes = ["image/jpg", "image/jpeg", "image/png"];
 
+    if (validImageTypes.indexOf(fileType) < 0) {
+        alert("Invalid file type. Please select an image file (jpg, jpeg, png)");
+        return false;
+    }
+    return true;
+}
 function allowDrop(event) {
     // Prevent default behavior of the event (prevent the file from being opened)
     event.preventDefault();
@@ -156,28 +169,28 @@ function displayOtherStatusAds(ad) {
     let card = requireElements[0];
     let buttonContainer = requireElements[1];
 
-// Create the "Mark As Sold" button element
+    // Create the "Mark As Sold" button element
     const markAsSoldButton = document.createElement("button");
     markAsSoldButton.classList.add("btn", "btn-primary", "mx-2");
     markAsSoldButton.disabled = true;
     markAsSoldButton.textContent = "Mark As Sold";
     buttonContainer.appendChild(markAsSoldButton);
 
-// Create the "Edit" button element
+    // Create the "Edit" button element
     const editButton = document.createElement("button");
     editButton.classList.add("btn", "btn-secondary", "mx-2");
     editButton.disabled = true;
     editButton.innerHTML = '<i class="fa-solid fa-file-pen"></i> Edit';
     buttonContainer.appendChild(editButton);
 
-// Create the "Delete" button element
+    // Create the "Delete" button element
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("btn", "btn-danger", "mx-2");
     deleteButton.disabled = true;
     deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i> Delete';
     buttonContainer.appendChild(deleteButton);
 
-// Create the overlay element
+    // Create the overlay element
     const overlay = document.createElement("div");
     overlay.classList.add("overlay");
     overlay.style.position = "absolute";
@@ -192,7 +205,7 @@ function displayOtherStatusAds(ad) {
     card.appendChild(overlay);
 
 
-// Create the status element
+    // Create the status element
     let status = document.createElement("h2");
     status.style.color = "white";
     status.textContent = ad.status;
@@ -256,7 +269,7 @@ function btnDeleteAdClicked(adId, image) {
 }
 
 function sendUpdateRequestToAPi(typeOfOperation, adID, image) {
-    let data = {OperationType: typeOfOperation, adID: adID, imageURI: image};
+    let data = { OperationType: typeOfOperation, adID: adID, imageURI: image };
 
     // Send a POST request to the server with logged user and promising the response message
     fetch('http://localhost/api/updateAd', {
@@ -282,35 +295,6 @@ function clearScreen() {
 function loginMessageForSignOut() {
     document.getElementById("displayMessage").innerText = "Please,login in order to view,edit or post an Ad"; // changing the message when logged in
 }
-
-function displayInformativeMessage() {
-    const container = document.createElement('div');
-    container.classList.add('container', 'mt-5');
-
-    const row = document.createElement('div');
-    row.classList.add('row');
-
-    const col = document.createElement('div');
-    col.classList.add('col-lg-8', 'offset-lg-2', 'text-center');
-
-    const heading = document.createElement('h1');
-    heading.classList.add('font-weight-bold');
-
-    const text = document.createTextNode("No ads at the moment? That's okay, just think of it as a chance to take a break and come back refreshed and ready to shop!");
-
-    const emoji = document.createElement('span');
-    emoji.classList.add('emoji');
-    emoji.style.fontSize = '1.0em';
-    emoji.textContent = '👀';
-    heading.appendChild(text);
-    heading.appendChild(emoji);
-    col.appendChild(heading);
-    row.appendChild(col);
-    container.appendChild(row);
-    document.body.appendChild(container);
-
-}
-
 function editAdButtonClicked(adID, adImage, adProductName, adDescription, adPrice) {
     clearEveryInputInEditModel();
     setValuesForEditModel(adID, adImage, adProductName, adDescription.replace(/\\/g, ""), adPrice); // removing slash sent by php addslashesMethod
@@ -410,14 +394,16 @@ function createHorizontalAdCard(ad) {
 }
 
 function previewImage(input) {
+    if (!checkUploadedFile(input.files[0])) {
+        return;
+    }
     if (input.files && input.files[0]) {
-        var reader = new FileReader();
+        let reader = new FileReader();
         reader.onload = function (e) {
             document.getElementById('AdEditImageURI').src = e.target.result;
         }
         reader.readAsDataURL(input.files[0]);
     }
-
 }
 
 function decodeHtml(safe) {
@@ -448,7 +434,7 @@ async function editAdModalSaveChangeButtonClicked() {
     if (!inputImage) {
         inputImage = await getImageFileUsingPath();
     }
-    if(!validateForm(adProductName,adProductPrice,adDescription,inputImage)){
+    if (!validateForm(adProductName, adProductPrice, adDescription, inputImage)) {
         return;
     }
 
@@ -486,7 +472,7 @@ function sendEditRequestToAPI(formData) {
 function getImageFileUsingPath() {
     let imgElement = document.getElementById('AdEditImageURI');
     let imgSrc = imgElement.src;
-// taking the current previewing image src and sending this data if user does not select image
+    // taking the current previewing image src and sending this data if user does not select image
     return fetch(imgSrc)
         .then(response => response.blob())
         .then(blob => {
@@ -494,8 +480,110 @@ function getImageFileUsingPath() {
             let fileType = blob.type;
             // taking the file type from blob and passing filetype as argument while creating File
             // Create a new File object
-            let file = new File([blob], fileName, {type: fileType});
+            let file = new File([blob], fileName, { type: fileType });
             return file;
         })
 
 }
+
+function onInputValueChangeForSearch(input) {
+    let productName = escapeHtml(input.value);
+    fetch("http://localhost/api/searchproducts?name=" + productName)
+        .then(response => response.json())
+        .then(ads => {
+            document.getElementById("containerRowContainerAvailableAds").innerHTML = ""; // clearing first
+            if (Object.keys(ads).length !== 0) {
+                ads.forEach(function (ad) {
+                    showAvailableAdsForHomePage(ad);
+                })
+            }
+            else {
+                resultNotFoundForSearchMessage(input.value);
+            }
+        });
+
+}
+function resultNotFoundForSearchMessage(inputValue) {
+    let errorMessage = document.createElement("h2");
+    errorMessage.innerHTML = "🤷 Sorry, no search result found for " + '"' + inputValue + '"' + " 🙁";
+    document.getElementById("containerRowContainerAvailableAds").appendChild(errorMessage);
+
+}
+function showAvailableAdsForHomePage(ad) {
+    let col = document.createElement("div");
+    col.classList.add("col-md-4", "col-sm-12", "col-xl-3", "my-3");
+
+    let card = document.createElement("div");
+    card.classList.add("card", "h-100", "shadow");
+
+    let img = document.createElement("img");
+    img.src = ad.imageUri;
+    img.classList.add("img-fluid", "card-img-top");
+    img.alt = ad.productName;
+    img.style.width = "300px";
+    img.style.height = "300px";
+
+    let cardBody = document.createElement("div");
+    cardBody.classList.add("card-body");
+
+    let h3 = document.createElement("h3");
+    h3.classList.add("card-title");
+    h3.textContent = decodeHtml(ad.productName);
+
+    let p = document.createElement("p");
+    p.classList.add("card-text");
+    p.textContent = decodeHtml(ad.description);
+
+    let button = document.createElement("button");
+    button.classList.add("btn", "btn-primary", "position-relative");
+    button.type = "submit";
+    button.innerHTML = "<i class='fa-solid fa-cart-plus'></i> €" + decodeHtml(ad.price.toString());
+    // add event listener to button
+    button.addEventListener("click", function () {
+        addToCartClicked(ad.id);
+    });
+
+    let cardFooter = document.createElement("div");
+    cardFooter.classList.add("card-footer");
+
+    let pFooter = document.createElement("p");
+    pFooter.classList.add("card-text");
+
+    let small = document.createElement("small");
+    small.classList.add("text-muted");
+    small.textContent = ad.postedDate + " posted by";
+
+    let strong = document.createElement("strong");
+    strong.textContent = ad.user.firstName;
+
+    pFooter.appendChild(small);
+    small.appendChild(strong);
+    cardBody.appendChild(h3);
+    cardBody.appendChild(p);
+    cardBody.appendChild(button);
+    cardFooter.appendChild(pFooter);
+    card.appendChild(img);
+    card.appendChild(cardBody);
+    card.appendChild(cardFooter);
+    col.appendChild(card);
+
+    // Append col to the parent element
+    document.getElementById("containerRowContainerAvailableAds").appendChild(col);
+
+}
+function addToCartClicked(adID) {
+    // Create a form element
+    let form = document.createElement("form");
+    form.method = "post";
+    form.action = "/home/shoppingCart";
+    // Create a hidden input field to store the data
+
+    let input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "AdID";
+    input.value = adID;
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+}
+

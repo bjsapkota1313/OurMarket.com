@@ -1,28 +1,10 @@
 
-function showLoginFailed(){
-    const currentDiv=document.getElementById("rememberMe");
-    var newDiv=document.createElement("div");
-    newDiv.className="alert-danger";
-    newDiv.style.color="red";
-    newDiv.innerHTML="Incorrect Details";
+function showLoginFailed() {
+    const currentDiv = document.getElementById("passwordDiv");
+    var newDiv = document.createElement("div");
+    newDiv.className = "alert-danger pb-3";
+    newDiv.style.color = "red";
+    newDiv.innerHTML = "Please check you login credentials and Try again!";
     currentDiv.appendChild(newDiv);
 }
-function handleLoginForm() {
-    console.log("Ït working");
-    // Get the form data
-    const email = document.getElementById("floatingInput").value;
-    const password = document.getElementById("floatingPassword").value;
 
-    // Send an HTTP request to the server
-    const data={email:email,password:password};
-    fetch( "http://localhost/home/login",{
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-
-    }).then(result=> {
-    console.log(result);
-        })
-}

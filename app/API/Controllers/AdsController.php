@@ -12,7 +12,7 @@ class AdsController
         $this->adService = new AdService();
     }
 
-    public function index(): void
+    public function postNewAdRequest(): void
     {
         $this->sendHeaders();
 
@@ -22,8 +22,8 @@ class AdsController
             $adDetails = json_decode($_POST['adDetails'], true);
             $username = htmlspecialchars($adDetails['loggedUserName']);
             $productName = htmlspecialchars($adDetails['productName']);
-            $productPrice=htmlspecialchars($adDetails['price']);
-            $productDescription=htmlspecialchars($adDetails['productDescription']);
+            $productPrice = htmlspecialchars($adDetails['price']);
+            $productDescription = htmlspecialchars($adDetails['productDescription']);
             // Process the image file
             $image = $_FILES['image'];
             $responseData = $this->processImage($image);
@@ -33,11 +33,10 @@ class AdsController
                 $imageName = $image['name'];
                 $targetDirectory = "img/";
                 $imageExtension = explode('.', $imageName);
-                $newImageName = "OurMarket". "-" . date("Y-m-d") ."-".time(). "-" . $username . "." . end($imageExtension); // making each file unique by renaming it
+                $newImageName = "OurMarket" . "-" . date("Y-m-d") . "-" . time() . "-" . $username . "." . end($imageExtension); // making each file unique by renaming it
                 //when everything is correct
-                $this->adService->postNewAd($this->createAd($productName, $productPrice,$productDescription , "/" . $targetDirectory . $newImageName, $adDetails['loggedUserId']));
-                move_uploaded_file($imageTempName, $targetDirectory . $imageName);
-                rename($targetDirectory . $imageName, $targetDirectory . $newImageName);
+                $this->adService->postNewAd($this->createAd($productName, $productPrice, $productDescription, "/" . $targetDirectory . $newImageName, $adDetails['loggedUserId']));
+                move_uploaded_file($imageTempName, $targetDirectory . $newImageName);
             } else {
                 $responseData = array(
                     "success" => false,
@@ -51,7 +50,21 @@ class AdsController
             // Send the response message as the body of the HTTP response
             echo $responseJson;
         }
+    }
 
+    public function handleSearchRequest(): void
+    {
+        $this->sendHeaders();
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            $ads = null;
+            if (empty($_GET['name'])) {
+                $ads = $this->adService->getAllAvailableAds();
+            } else {
+                $productName = htmlspecialchars($_GET['name']);
+                $ads = $this->adService->searchAdsByProductName($productName);
+            }
+            echo json_encode($ads);
+        }
     }
 
     public function handleAdEditRequest(): void
@@ -67,12 +80,11 @@ class AdsController
             // Process the image file
             $image = $_FILES['inputImage'];
             // Validate the image file
-            $responseData=$this->processImage($image);
+            $responseData = $this->processImage($image);
             if ($responseData['success']) {
                 error_clear_last();
-                $this->adService->editAdWithNewDetails($image,$productName,$productDescription,$productPrice,$adID);
-                $responseData=$this->getResponseMessage(error_get_last());
-
+                $this->adService->editAdWithNewDetails($image, $productName, $productDescription, $productPrice, $adID);
+                $responseData = $this->getResponseMessage(error_get_last());
             } else {
                 $responseData = array(
                     "success" => false,
@@ -81,7 +93,6 @@ class AdsController
             }
             echo json_encode($responseData);
         }
-
     }
 
     public function operateAdRequest(): void
@@ -116,7 +127,7 @@ class AdsController
             $loggedUserId = htmlspecialchars($data->loggedUserId);
             $user = new User();
             $user->setId($loggedUserId);
-            $ads = $this->adService->getAdsByLoggedUser($user);//already had method so just making user object and setting id only
+            $ads = $this->adService->getAdsByLoggedUser($user); //already had method so just making user object and setting id only
             echo json_encode($ads);
         }
     }
@@ -174,8 +185,6 @@ class AdsController
             );
         }
     }
-
-
     private function sendHeaders(): void
     {
         header('X-Powered-By: PHP/8.1.13');

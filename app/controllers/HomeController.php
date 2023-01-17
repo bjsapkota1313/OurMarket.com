@@ -1,46 +1,41 @@
 <?php
 require __DIR__ . "/../Models/User.php";
-require __DIR__ ."/../Models/Ad.php";
-require __DIR__ ."/../Services/AdService.php";
+require __DIR__ . "/../Models/Ad.php";
+require __DIR__ . "/../Services/AdService.php";
+require  __DIR__ . "/../Logic/LoggingInAndOut.php";
 
 class HomeController
 {
-     private $adService;
+    private $adService;
 
     public function __construct()
     {
-        $this->adService=new AdService();
+        $this->adService = new AdService();
     }
     public function displayHomePage()
     {
-        $ads=$this->adService->getAllAvailableAds(Status::Available); // only showing available ads
+        $ads = $this->adService->getAllAvailableAds(); // only showing available ads
         require __DIR__ . "/../Views/HomePage/Home.php";
-        include_once __DIR__.'/../Views/Footer.php';
         $this->showAvailableAds($ads);
+        require __DIR__ . '/../Views/Footer.php';
         $this->loginAndSignout();
     }
     private function loginAndSignout(): void
     {
-        if (isset($_SESSION["loggedUser"])) {
-            echo '<script>             
-                disableLoginButton();
-                </script>';
+        if (!is_null(getLoggedUser())) {
+            echo '<script>disableLoginButton();</script>';
         }
         if (isset($_POST["btnSignOut"])) {
-            //session_destroy();
-            unset($_SESSION["loggedUser"]);
-            echo '<script>
-              enableLogin();
-                </script>';
+            logOutFromApp();
+            echo '<script>enableLogin()</script>';
         }
     }
-    private function showAvailableAds($ads) :void{
-        if(is_null($ads)){
-            echo '<script>displayInformativeMessage()</script>';
-        }
-        else{
-            require __DIR__.'/../Views/HomePage/ShowAvailableAds.php';
+    private function showAvailableAds($ads): void
+    {
+        if (is_null($ads)) {
+            require __DIR__ . '/../Views/HomePage/NoAdsAvailableToBeSold.html';
+        } else {
+            require __DIR__ . '/../Views/HomePage/ShowAvailableAds.php';
         }
     }
-
 }
