@@ -65,4 +65,17 @@ class UserRepository extends Repository
         }
         return null;
     }
+    public function insertUserInDatabase($userDetails) :bool{
+        $stmt = $this->connection->prepare("INSERT INTO Users( firstName, lastName, email, HashPassword, Salt) VALUES (:firstName,:lastName,:email,:hashPassword,:salt)");
+        $stmt->bindValue(":firstName",$userDetails["firstName"]);
+        $stmt->bindValue(":lastName",$userDetails["lastName"]);
+        $stmt->bindValue(":email",$userDetails["email"]);
+        $stmt->bindValue(":hashPassword",$userDetails["hashPassword"]);
+        $stmt->bindValue(":salt",$userDetails["salt"]);
+        $stmt->execute();
+        if ($stmt->rowCount()==0){
+            return false;
+        }
+        return true;
+    }
 }

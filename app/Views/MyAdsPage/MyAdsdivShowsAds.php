@@ -11,8 +11,8 @@
                     </div>
                     <div class="col-md-8 col-xl-8 d-flex flex-column justify-content-around">
                         <div class="card-body">
-                            <h5 class="card-title"><?= htmlspecialchars_decode($ad->getProductName()) ?></h5>
-                            <p class="card-text"><?= htmlspecialchars_decode($ad->getDescription()) ?></p>
+                            <h5 class="card-title"><?= $ad->getProductName() ?></h5>
+                            <p class="card-text"><?= $ad->getDescription() ?></p>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item"><strong>Price:</strong>
                                     €<?= number_format($ad->getPrice(), 2, '.') ?></li>
@@ -43,8 +43,8 @@
                     </div>
                     <div class="col-md-8 col-xl-8 d-flex flex-column justify-content-around">
                         <div class="card-body">
-                            <h5 class="card-title"><?= htmlspecialchars_decode($ad->getProductName()) ?></h5>
-                            <p class="card-text"><?= htmlspecialchars_decode($ad->getDescription()) ?></p>
+                            <h5 class="card-title"><?= $ad->getProductName() ?></h5>
+                            <p class="card-text"><?= $ad->getDescription() ?></p>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item"><strong>Price:</strong>
                                     €<?= number_format($ad->getPrice(), 2, '.') ?></li>

@@ -8,6 +8,7 @@ This application is a web-based ads platform that utilizes the following technol
 
 ## Features
 - The homepage displays available ads and allows both logged in and non-logged in users to access them, sorted by recent dates. 
+- The new user can be registered by signup page
 - The "My Ads" page, accessible only to logged in users, allows for CRUD operations on ad posts, including editing, marking as sold, and deleting. 
 - There is a Search bar also where products can be searched in the entire database.
 - The application also includes four local APIs for editing, creating, deleting and searching products, and a shopping cart feature for purchasing them. 

@@ -110,7 +110,7 @@ function createHorizontalAdCard(ad) {
 
     // Create the image element
     let image = document.createElement("img");
-    image.src = decodeHtml(ad.imageUri);
+    image.src = ad.imageUri;
     image.classList.add("img-fluid", "rounded-start");
     imageCol.appendChild(image);
 
@@ -127,13 +127,13 @@ function createHorizontalAdCard(ad) {
     // Create the product name element
     let productName = document.createElement("h5");
     productName.classList.add("card-title");
-    productName.textContent = decodeHtml(ad.productName);
+    productName.textContent = ad.productName;
     detailsBody.appendChild(productName);
 
     // Create the product description element
     let productDescription = document.createElement("p");
     productDescription.classList.add("card-text");
-    productDescription.textContent = decodeHtml(ad.description);
+    productDescription.textContent = ad.description;
     detailsBody.appendChild(productDescription);
 
     // Create the list group element
@@ -144,7 +144,7 @@ function createHorizontalAdCard(ad) {
     // Create the price list item element
     let priceListItem = document.createElement("li");
     priceListItem.classList.add("list-group-item");
-    priceListItem.innerHTML = '<strong>Price:</strong> €' + decodeHtml(ad.price.toFixed(2));
+    priceListItem.innerHTML = '<strong>Price:</strong> €' + ad.price.toFixed(2);
     listGroup.appendChild(priceListItem);
 
     // Create the status list item element
@@ -186,7 +186,6 @@ function loadAdsOfLoggedUser() {
                 } else {
                     displayOtherStatusAds(ad);
                 }
-
             })
         })
 }
@@ -385,10 +384,10 @@ function clearEveryInputInEditModel() {
 }
 
 function setValuesForEditModel(adId, adImage, adProductName, adDescription, adPrice) {
-    document.getElementById("hiddenAdIdEditAdModal").value = decodeHtml(adId.toString());
-    document.getElementById("AdEditProductName").value = decodeHtml(adProductName);
-    document.getElementById("AdEditPrice").value = decodeHtml(adPrice.toString()); // converting to string so that they can be passed to htmldecoder
-    document.getElementById("AdEditDescription").value = decodeHtml(adDescription);
+    document.getElementById("hiddenAdIdEditAdModal").value = (adId);
+    document.getElementById("AdEditProductName").value = adProductName;
+    document.getElementById("AdEditPrice").value = adPrice;
+    document.getElementById("AdEditDescription").value = adDescription;
     document.getElementById("AdEditImageURI").src = adImage;
 }
 
@@ -403,14 +402,6 @@ function previewImage(input) {
         }
         reader.readAsDataURL(input.files[0]);
     }
-}
-function decodeHtml(safe) {
-    return safe
-        .replace(/&amp;/g, "&")
-        .replace(/&lt;/g, "<")
-        .replace(/&gt;/g, ">")
-        .replace(/&quot;/g, '"')
-        .replace(/&#039;/g, "'");
 }
 
 function escapeHtml(unsafe) {
@@ -526,16 +517,16 @@ function showAvailableAdsForHomePage(ad) {
 
     let h3 = document.createElement("h3");
     h3.classList.add("card-title");
-    h3.textContent = decodeHtml(ad.productName);
+    h3.textContent = ad.productName;
 
     let p = document.createElement("p");
     p.classList.add("card-text");
-    p.textContent = decodeHtml(ad.description);
+    p.textContent = ad.description;
 
     let button = document.createElement("button");
     button.classList.add("btn", "btn-primary", "position-relative");
     button.type = "submit";
-    button.innerHTML = "<i class='fa-solid fa-cart-plus'></i> €" + decodeHtml(ad.price.toString());
+    button.innerHTML = "<i class='fa-solid fa-cart-plus'></i> €" + ad.price.toString();
     // add event listener to button
     button.addEventListener("click", function () {
         addToCartClicked(ad.id);

@@ -8,10 +8,10 @@
                 <div class="card h-100 shadow">
                     <img src="<?= $ad->getImageUri() ?>" class="img-fluid card-img-top" alt="<?= $ad->getProductName() ?>" style="width:300px; height:300px">
                     <div class="card-body">
-                        <h3 class="card-title"><?= htmlspecialchars_decode($ad->getProductName()) ?></h3>
-                        <p class="card-text"><?= htmlspecialchars_decode($ad->getDescription()) ?></p>
+                        <h3 class="card-title"><?= $ad->getProductName() ?></h3>
+                        <p class="card-text"><?= $ad->getDescription() ?></p>
                         <button id="AddToCart" class="btn btn-primary position-relative" type="submit" onclick="addToCartClicked(<?= $ad->getId() ?>)"><i class="fa-solid fa-cart-plus"></i>
-                            €<?= htmlspecialchars_decode(number_format($ad->getPrice(), 2, '.')) ?> </button>
+                            €<?= number_format($ad->getPrice(), 2, '.') ?> </button>
                     </div>
                     <div class="card-footer ">
                         <p class="card-text"><small class="text-muted"><?= $ad->getPostedDate() ?> posted by

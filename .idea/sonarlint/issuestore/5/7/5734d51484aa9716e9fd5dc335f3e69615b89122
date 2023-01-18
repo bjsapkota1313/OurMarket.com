@@ -1,7 +1,15 @@
 
 _php:S103$"KSplit this 170 characters long line (which is greater than 120 authorized).(Ê¾Ÿì
 dphp:S103&"KSplit this 179 characters long line (which is greater than 120 authorized).(Ìü›şÿÿÿÿ
+ephp:S103‚"KSplit this 131 characters long line (which is greater than 120 authorized).(ƒçØ€üÿÿÿÿ
+K	php:S1808L"6Put exactly one space after comma separated arguments.(€ĞŸ¬
+P	php:S1808M"6Put exactly one space after comma separated arguments.(ıÃ˜´ùÿÿÿÿ
+W	php:S1808N"6Put exactly one space after comma separated arguments.(úÓ±şÿÿÿÿ8Ş©ˆ®Ü0
+W	php:S1808O"6Put exactly one space after comma separated arguments.(·ÕÀõûÿÿÿÿ8áÂˆ®Ü0
+Q	php:S1808i"6Put exactly one space after comma separated arguments.(·!8¸Şˆ®Ü0
+V	php:S1784£"@Explicitly mention the visibility of this method "processImage".(ñ ÚÊ
 @	php:S2003"&Replace "require" with "require_once".(×¦èÿÿÿÿÿ
+Q	php:S1793o"<Replace this "else if" keyword sequence by "elseif" keyword.(Ø‘ É
 f	php:S4833"LReplace "require" with namespace import mechanism through the "use" keyword.(×¦èÿÿÿÿÿ
 f	php:S4833"QReplace "require_once" with namespace import mechanism through the "use" keyword.(âßÀğ
 k	php:S4833"QReplace "require_once" with namespace import mechanism through the "use" keyword.(ÎşÁ¥ùÿÿÿÿ

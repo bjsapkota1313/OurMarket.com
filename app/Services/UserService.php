@@ -5,9 +5,7 @@ class UserService
 {
     private $repository;
 
-    /**
-     * @param $repository
-     */
+
     public function __construct()
     {
         $this->repository = new UserRepository();
@@ -18,13 +16,24 @@ class UserService
         return $this->repository->verifyAndGetUser($email, $password);
     }
 
-    /**
-     * @throws Exception
-     */
+
     public function hashPassword($password): array
     {
-        $salt = bin2hex(random_bytes(32));
-        $hashPassword = password_hash($password . $salt, PASSWORD_ARGON2I);
-        return [$hashPassword, $salt];
+        try {
+            $salt = bin2hex(random_bytes(32));
+            $hashPassword = password_hash($password . $salt, PASSWORD_ARGON2I);
+            return [$hashPassword, $salt];
+        } catch (Exception $exception) {
+            echo $exception->getMessage();
+        }
+    }
+
+
+    public function createNewUser($userDetails): bool
+    {
+        $hashPasswordWithSalt = $this->hashPassword($userDetails["password"]);
+        $userDetails["hashPassword"] = $hashPasswordWithSalt[0];
+        $userDetails["salt"] = $hashPasswordWithSalt[1];
+        return $this->repository->insertUserInDatabase($userDetails);
     }
 }

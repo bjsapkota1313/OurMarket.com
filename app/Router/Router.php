@@ -18,6 +18,11 @@ class Router
                 $controller = new LoginController();
                 $controller->displayLoginPage();
                 break;
+            case 'home/login/signup':
+                require __DIR__ . '/../controllers/SignUpController.php';
+                $controller=new SignUpController();
+                $controller->displaySignupPage();
+                break;
             case 'home/myAds':
                 require __DIR__ . '/../controllers/MyAdsController.php';
                 $controller = new MyAdsController();

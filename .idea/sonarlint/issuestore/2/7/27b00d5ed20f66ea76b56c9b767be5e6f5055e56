@@ -1,6 +1,18 @@
 
 _php:S103"KSplit this 179 characters long line (which is greater than 120 authorized).(–ÑÅİ
+kphp:S103+"KSplit this 149 characters long line (which is greater than 120 authorized).(ÿ§Ğÿÿÿÿÿ8”ñ¦­Ü0
+fphp:S1037"KSplit this 195 characters long line (which is greater than 120 authorized).(†Çº‘8”ñ¦­Ü0
+gphp:S103"KSplit this 179 characters long line (which is greater than 120 authorized).(œŸóÍ8”ñ¦­Ü0
+gphp:S103»"KSplit this 172 characters long line (which is greater than 120 authorized).(ÇÍÕš8”ñ¦­Ü0
+gphp:S103É"KSplit this 191 characters long line (which is greater than 120 authorized).(ˆ°««8”ñ¦­Ü0
+gphp:S103Ë"KSplit this 138 characters long line (which is greater than 120 authorized).(ñÕÕ—8”ñ¦­Ü0
+php:S117Q"_Rename this local variable "$rows_updated" to match the regular expression ^[a-z][a-zA-Z0-9]*$.(ÜÎÄ¾üÿÿÿÿ8”ñ¦­Ü0
+php:S117c"_Rename this local variable "$rows_updated" to match the regular expression ^[a-z][a-zA-Z0-9]*$.(ÜÎÄ¾üÿÿÿÿ8”ñ¦­Ü0
+a	php:S1192,"FDefine a constant instead of duplicating this literal ":adId" 4 times.(öÖÚ48˜ñ¦­Ü0
+p	php:S1192Y"TDefine a constant instead of duplicating this literal "An error occurred: " 6 times.(Ÿ¨æÕ8˜ñ¦­Ü0
 ]	php:S1192"HDefine a constant instead of duplicating this literal ":status" 3 times.(ÍĞÓı
+o	php:S1192‘"MDefine a constant instead of duplicating this literal ":productName" 3 times.(çøìûûÿÿÿÿ8™ñ¦­Ü0
+Sphp:S836³"2Review the data-flow - use of uninitialized value.(™­•Öşÿÿÿÿ8™ñ¦­Ü0
 k	php:S4833"QReplace "require_once" with namespace import mechanism through the "use" keyword.(ùé‚Úÿÿÿÿÿ
 k	php:S4833"QReplace "require_once" with namespace import mechanism through the "use" keyword.(ªöíòıÿÿÿÿ
 k	php:S4833"QReplace "require_once" with namespace import mechanism through the "use" keyword.(Ÿ¬˜øÿÿÿÿ

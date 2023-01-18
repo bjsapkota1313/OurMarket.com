@@ -10,12 +10,19 @@ class LoginController
     {
         $this->userService = new UserService();
     }
-
-    public function displayLoginPage()
+    public function displayLoginPage() :void
     {
-        require __DIR__ . "/../Views/LoginPage/Login.php";
-        require __DIR__ . '/../Views/LoginPage/LoginFooter.php';
-        $this->loginToApp();
+        if(is_null(getLoggedUser())){
+            require __DIR__ . "/../Views/LoginPage/Login.php";
+            require __DIR__ . '/../Views/LoginPage/LoginFooter.php';
+            $this->loginToApp();
+        }
+        else{
+            echo"<Script>alert('you are already logged in to system you dont have to log in again')</Script>";
+            echo "<script>location.href = '/home/myAds'</script>";
+            exit();
+        }
+
     }
     private function loginToApp(): void
     {
