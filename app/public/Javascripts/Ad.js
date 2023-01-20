@@ -46,8 +46,6 @@ function showPostNewAd() {
 }
 
 function postNewAdd() {
-    // Prevent the default form submission behavior
-    event.preventDefault();
     const inputLoggedUserId = escapeHtml(document.getElementById("hiddenLoggedUserId").value);
     const inputLoggedUserName = escapeHtml(document.getElementById("loggedUserName").value);
     const inputProductName = escapeHtml(document.getElementById("productName").value);
@@ -73,6 +71,8 @@ function postNewAdd() {
 }
 
 function sendRequestForInsertingAd(formData) {
+    //  e.preventDefault to see the differences
+    event.preventDefault()
     // Send a POST request to the server with the form data
     fetch('http://localhost/api/adsapi', {
         method: 'POST',
@@ -89,7 +89,7 @@ function sendRequestForInsertingAd(formData) {
             } else {
                 alert(responseData.message);
             }
-        });
+         }) .catch(err => console.error(err));
 }
 function createHorizontalAdCard(ad) {
     // Create the main card element
@@ -187,7 +187,7 @@ function loadAdsOfLoggedUser() {
                     displayOtherStatusAds(ad);
                 }
             })
-        })
+        }).catch(err => console.error(err));
 }
 
 function validateForm(productName, price, description, image) {
@@ -359,7 +359,7 @@ function sendUpdateRequestToAPi(typeOfOperation, adID, image) {
             } else {
                 alert(response.message);
             }
-        })
+        }).catch(err => console.error(err));
 }
 
 function clearScreen() {
@@ -455,7 +455,7 @@ function sendEditRequestToAPI(formData) {
             } else {
                 alert(responseData.message);
             }
-        });
+        }).catch(err => console.error(err));
 }
 
 function getImageFileUsingPath() {
@@ -471,7 +471,7 @@ function getImageFileUsingPath() {
             // Create a new File object
             let file = new File([blob], fileName, { type: fileType });
             return file;
-        })
+        }).catch(err => console.error(err));
 
 }
 

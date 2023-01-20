@@ -29,9 +29,9 @@ class AdService
     {
         return $this->adRepository->getAdsByLoggedUser($loggedUser);
     }
-    public function postNewAd(Ad $ad)
+    public function postNewAd(Ad $ad) :bool
     {
-        $this->adRepository->postNewAd($ad);
+         return $this->adRepository->postNewAd($ad);
     }
     public function updateStatusOfAd($status, $adID)
     {

@@ -1,4 +1,5 @@
 <?php
+
 class Repository
 {
     protected $connection;
@@ -12,7 +13,10 @@ class Repository
             // set the PDO error mode to exception
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+            $message = '[' . date("F j, Y, g:i a e O") . ']' . $e->getMessage() . $e->getCode() . $e->getFile() . ' Line ' . $e->getLine() . PHP_EOL;
+            error_log("Database connection failed: " . $message, 3, __DIR__ . "/../Errors/error.log");
+            http_response_code(503);
+            exit();
         }
     }
 }

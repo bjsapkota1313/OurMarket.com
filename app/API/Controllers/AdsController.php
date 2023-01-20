@@ -15,10 +15,10 @@ class AdsController
     public function postNewAdRequest(): void
     {
         $this->sendHeaders();
+        $responseData = array();
 
         // Respond to a POST request to /api/article
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $responseData = array();
             $adDetails = json_decode($_POST['adDetails'], true);
             $username = htmlspecialchars($adDetails['loggedUserName']);
             $productName = htmlspecialchars($adDetails['productName']);
@@ -33,15 +33,25 @@ class AdsController
                 $imageName = $image['name'];
                 $targetDirectory = "img/";
                 $imageExtension = explode('.', $imageName);
-                $newImageName = "OurMarket" . "-" . date("Y-m-d") . "-" . time() . "-" . $username . "." . end($imageExtension); // making each file unique by renaming it
+                $newImageName = "OurMarket" . "-" . date("Y-m-d") . "-" . time() . "-"
+                    . $username . "." . end($imageExtension); // making each file unique by renaming it
                 //when everything is correct
-                $this->adService->postNewAd($this->createAd($productName, $productPrice, $productDescription, "/" . $targetDirectory . $newImageName, $adDetails['loggedUserId']));
-                move_uploaded_file($imageTempName, $targetDirectory . $newImageName);
-            } else {
-                $responseData = array(
-                    "success" => false,
-                    "message" => "Something went Wrong while uploading image"
-                );
+                $checkInDb = $this->adService->postNewAd($this->createAd($productName, $productPrice, $productDescription, "/" .
+                    $targetDirectory . $newImageName, $adDetails['loggedUserId']));
+                if ($checkInDb) {
+                    $uploadedFile = move_uploaded_file($imageTempName, $targetDirectory . $newImageName);
+                    if (!$uploadedFile) {
+                        $responseData = array(
+                            "success" => false,
+                            "message" => "Something went Wrong while processing your uploaded image"
+                        );
+                    }
+                } else {
+                    $responseData = array(
+                        "success" => false,
+                        "message" => "Something went Wrong while processing your Add request"
+                    );
+                }
             }
 
             // Convert the response message to a JSON string
@@ -73,10 +83,10 @@ class AdsController
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $responseData = array();
             $editedAdDetails = json_decode($_POST['editedAdDetails'], true);
-            $productName = htmlspecialchars($editedAdDetails['productName'],ENT_QUOTES, 'UTF-8');
-            $productPrice = htmlspecialchars($editedAdDetails['price'],ENT_QUOTES, 'UTF-8');
-            $productDescription = htmlspecialchars($editedAdDetails['productDescription'],ENT_QUOTES, 'UTF-8');
-            $adID = htmlspecialchars($editedAdDetails["adId"],ENT_QUOTES, 'UTF-8');
+            $productName = htmlspecialchars($editedAdDetails['productName'], ENT_QUOTES, 'UTF-8');
+            $productPrice = htmlspecialchars($editedAdDetails['price'], ENT_QUOTES, 'UTF-8');
+            $productDescription = htmlspecialchars($editedAdDetails['productDescription'], ENT_QUOTES, 'UTF-8');
+            $adID = htmlspecialchars($editedAdDetails["adId"], ENT_QUOTES, 'UTF-8');
             // Process the image file
             $image = $_FILES['inputImage'];
             // Validate the image file
@@ -85,11 +95,6 @@ class AdsController
                 error_clear_last();
                 $this->adService->editAdWithNewDetails($image, $productName, $productDescription, $productPrice, $adID);
                 $responseData = $this->getResponseMessage(error_get_last());
-            } else {
-                $responseData = array(
-                    "success" => false,
-                    "message" => "Something went Wrong while Processing image"
-                );
             }
             echo json_encode($responseData);
         }
@@ -102,7 +107,7 @@ class AdsController
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $body = file_get_contents('php://input');
             $data = json_decode($body);
-            if (htmlspecialchars($data->OperationType,ENT_QUOTES, 'UTF-8') == "ChangeStatusOfAd") {
+            if (htmlspecialchars($data->OperationType, ENT_QUOTES, 'UTF-8') == "ChangeStatusOfAd") {
                 error_clear_last();
                 $this->adService->markAdAsSold(htmlspecialchars($data->adID));
                 // checking if are triggered or not
@@ -185,6 +190,7 @@ class AdsController
             );
         }
     }
+
     private function sendHeaders(): void
     {
         header('X-Powered-By: PHP/8.1.13');

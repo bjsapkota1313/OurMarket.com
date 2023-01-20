@@ -33,9 +33,13 @@ class AdRepository extends Repository
             }
             return null;
         } catch (PDOException  $e) {
-            echo $e;
+            $message = '[' . date("F j, Y, g:i a e O") . ']' . $e->getMessage() . $e->getCode() . $e->getFile() . ' Line ' . $e->getLine() . PHP_EOL;
+            error_log("Something went wrong getting ads from database " . $message, 3, __DIR__ . "/../Errors/error.log");
+            http_response_code(500);
+            exit();
         }
     }
+
     public function getAdByID($adId): Ad
     {
         try {
@@ -46,9 +50,13 @@ class AdRepository extends Repository
             $row = $stmt->fetch();
             return $this->makeAnAd($row);
         } catch (PDOException  $e) {
-            echo $e;
+            $message = '[' . date("F j, Y, g:i a e O") . ']' . $e->getMessage() . $e->getCode() . $e->getFile() . ' Line ' . $e->getLine() . PHP_EOL;
+            error_log("Something went wrong getting ads from database " . $message, 3, __DIR__ . "/../Errors/error.log");
+            http_response_code(500);
+            exit();
         }
     }
+
     public function getAdsByLoggedUser($loggedUser)
     {
         try {
@@ -66,7 +74,10 @@ class AdRepository extends Repository
             }
             return null;
         } catch (PDOException $e) {
-            echo $e;
+            $message = '[' . date("F j, Y, g:i a e O") . ']' . $e->getMessage() . $e->getCode() . $e->getFile() . ' Line ' . $e->getLine() . PHP_EOL;
+            error_log("Something went wrong getting ads from database " . $message, 3, __DIR__ . "/../Errors/error.log");
+            http_response_code(500);
+            exit();
         }
     }
 
@@ -85,8 +96,8 @@ class AdRepository extends Repository
             } else {
                 trigger_error(" Ad couldn't be Updated", E_USER_ERROR);
             }
-        } catch (PDOException | Exception $e) {
-            trigger_error("An error occurred: ", E_USER_ERROR);
+        } catch (PDOException|Exception $e) {
+            trigger_error("An error occurred:  while updating status of ad", E_USER_ERROR);
         }
     }
 
@@ -107,7 +118,7 @@ class AdRepository extends Repository
             } else {
                 trigger_error(" Ad couldn't be Deleted", E_USER_ERROR);
             }
-        } catch (PDOException | Exception   $e) {
+        } catch (PDOException|Exception   $e) {
             trigger_error("An error occurred: " . $e->getMessage(), E_USER_ERROR);
         }
     }
@@ -125,6 +136,7 @@ class AdRepository extends Repository
         $ad->setUser($this->userRepo->getUserById($dBRow["userID"]));
         return $ad;
     }
+
     private function checkAdinDB($stmt): bool
     {
         try {
@@ -134,11 +146,14 @@ class AdRepository extends Repository
             }
             return false;
         } catch (PDOException $e) {
-            echo $e;
+            $message = '[' . date("F j, Y, g:i a e O") . ']' . $e->getMessage() . $e->getCode() . $e->getFile() . ' Line ' . $e->getLine() . PHP_EOL;
+            error_log("Something went wrong getting ads from database " . $message, 3, __DIR__ . "/../Errors/error.log");
+            http_response_code(500);
+            exit();
         }
     }
 
-    public function postNewAd(Ad $ad)
+    public function postNewAd(Ad $ad) :bool
     {
         try {
             $stmt = $this->connection->prepare("INSERT INTO Ads( productName, description,  price, userID, imageURI) VALUES (:productName,:description,:price,:userID,:imageURI)");
@@ -148,8 +163,15 @@ class AdRepository extends Repository
             $stmt->bindValue(":userID", $ad->getUser()->getId());
             $stmt->bindValue(":imageURI", $ad->getImageUri());
             $stmt->execute();
+            if ($stmt->rowCount() == 0) {
+                return false;
+            }
+            return true;
         } catch (PDOException $e) {
-            echo $e;
+            http_response_code(500);
+            $message = '[' . date("F j, Y, g:i a e O") . ']' . $e->getMessage() . $e->getCode() . $e->getFile() . ' Line ' . $e->getLine() . PHP_EOL;
+            error_log("Something went wrong getting ads from database " . $message, 3, __DIR__ . "/../Errors/error.log");
+            exit();
         }
     }
 
@@ -191,7 +213,7 @@ class AdRepository extends Repository
             $stmt->bindValue(":id", $adID);
             $stmt->bindValue(":imageURI", $storingImageUri);
             $stmt->execute();
-        } catch (PDOException | Exception $e) {
+        } catch (PDOException|Exception $e) {
             trigger_error("An error occurred: " . $e->getMessage(), E_USER_ERROR);
         }
     }
@@ -208,7 +230,7 @@ class AdRepository extends Repository
                 $ads[] = $this->MakeAnAD($row);
             }
             return $ads;
-        } catch (PDOException | Exception $e) {
+        } catch (PDOException|Exception $e) {
             trigger_error("An error occurred: " . $e->getMessage(), E_USER_ERROR);
         }
     }
@@ -226,7 +248,9 @@ class AdRepository extends Repository
             if (unlink($targetDirectory . $dbStoredImageName)) {
                 // deleting the file and renaming the new received image and returning it
                 $newFileName = $dbStoredNameWithoutExtension . '.' . $newImageExtension;
-                move_uploaded_file($imageTempName, $targetDirectory . $newFileName);
+                if(!move_uploaded_file($imageTempName, $targetDirectory . $newFileName)){
+                    trigger_error("error occurred while moving file " , E_USER_ERROR);
+                };
                 return $newFileName;
             }
             return null;

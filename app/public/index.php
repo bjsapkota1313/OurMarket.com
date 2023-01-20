@@ -2,6 +2,8 @@
 require __DIR__ . '/../Router/router.php';
 require __DIR__ . '/../Models/Status.php';
 
+ini_set('display_errors', 'Off'); // turning off the displaying of errors to browser
+
 $uri = trim($_SERVER['REQUEST_URI'], '/');
 
 // assigning session in the entry point of app so that is available for entire app

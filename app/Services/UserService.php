@@ -36,4 +36,8 @@ class UserService
         $userDetails["salt"] = $hashPasswordWithSalt[1];
         return $this->repository->insertUserInDatabase($userDetails);
     }
+
+    public function CheckUserExistenceByEmail($email) :bool{
+        return $this->repository->CheckUserEmailExistence($email);
+    }
 }

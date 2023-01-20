@@ -1,13 +1,21 @@
 
 _php:S103"KSplit this 136 characters long line (which is greater than 120 authorized).(§³×Ä
-_php:S103E"KSplit this 170 characters long line (which is greater than 120 authorized).(›Å¿Ğ
-W	php:S1808D"=Move this open curly brace to the beginning of the next line.(¾ìçæúÿÿÿÿ
-d	php:S1808L"JPut one space between the closing parenthesis and the opening curly brace.(³±®„øÿÿÿÿ
-W	php:S1808F"6Put exactly one space after comma separated arguments.(¨§íøÿÿÿÿ8âÔ™µÜ0
-R	php:S1808G"6Put exactly one space after comma separated arguments.(¥Ä÷ä8¬„›µÜ0
-W	php:S1808H"6Put exactly one space after comma separated arguments.(ÌÃŒ„üÿÿÿÿ8ã¼›µÜ0
-W	php:S1808I"6Put exactly one space after comma separated arguments.(Å©°‡ıÿÿÿÿ8ŒÙ›µÜ0
-R	php:S1808J"6Put exactly one space after comma separated arguments.(ÓêË¶8¬ø›µÜ0
+^php:S103"KSplit this 149 characters long line (which is greater than 120 authorized).(Ó¾ÈA
+^php:S103)"KSplit this 149 characters long line (which is greater than 120 authorized).(Ó¾ÈA
+^php:S1039"KSplit this 149 characters long line (which is greater than 120 authorized).(Ó¾ÈA
+^php:S103Q"KSplit this 149 characters long line (which is greater than 120 authorized).(Ó¾ÈA
+_php:S103\"KSplit this 174 characters long line (which is greater than 120 authorized).(›Å¿Ğ
+^php:S103h"KSplit this 149 characters long line (which is greater than 120 authorized).(Ó¾ÈA
+^php:S103v"KSplit this 149 characters long line (which is greater than 120 authorized).(Ó¾ÈA
+W	php:S1808o"=Move this open curly brace to the beginning of the next line.(•É“ ÿÿÿÿÿ
+a	php:S1808u"GMove this "catch" to the same line as the previous closing curly brace.(¢­¸–øÿÿÿÿ
+K	php:S1808r"6Put exactly one space after comma separated arguments.(ûºùª
+_	php:S1808p"EPut one space between this "try" keyword and the opening curly brace.(¡»¢üùÿÿÿÿ
 ^	php:S1784"DExplicitly mention the visibility of this method "verifyAndGetUser".(…·‘‰ÿÿÿÿÿ
+o	php:S1192"UDefine a constant instead of duplicating this literal "/../Errors/error.log" 6 times.(ï‘÷‚ÿÿÿÿÿ
+f	php:S1192"RDefine a constant instead of duplicating this literal "F j, Y, g:i a e O" 6 times.(Ó¾ÈA
+[	php:S1192"GDefine a constant instead of duplicating this literal " Line " 6 times.(Ó¾ÈA
+w	php:S1192"]Define a constant instead of duplicating this literal "Database connection failed: " 6 times.(ï‘÷‚ÿÿÿÿÿ
+a	php:S1192"GDefine a constant instead of duplicating this literal ":email" 3 times.(íÆÔÅøÿÿÿÿ
 k	php:S4833"QReplace "require_once" with namespace import mechanism through the "use" keyword.(ìƒÀúÿÿÿÿ
 k	php:S4833"QReplace "include_once" with namespace import mechanism through the "use" keyword.(ê‚‹€øÿÿÿÿ

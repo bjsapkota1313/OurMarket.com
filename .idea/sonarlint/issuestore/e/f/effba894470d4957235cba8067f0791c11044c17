@@ -1,14 +1,17 @@
 
-kphp:S103"KSplit this 169 characters long line (which is greater than 120 authorized).(œª”Ïúÿÿÿÿ8ğ¹Ô·Ü0
-dphp:S103"KSplit this 135 characters long line (which is greater than 120 authorized).(ç‘Œ‘ùÿÿÿÿ
+fphp:S103"KSplit this 161 characters long line (which is greater than 120 authorized).(êÛõê8ËŒ©„İ0
+dphp:S103"KSplit this 169 characters long line (which is greater than 120 authorized).(œª”Ïúÿÿÿÿ
+kphp:S103 "KSplit this 135 characters long line (which is greater than 120 authorized).(ç‘Œ‘ùÿÿÿÿ8éû„İ0
 W	php:S1808"=Move this open curly brace to the beginning of the next line.(¹Ø×Ïÿÿÿÿÿ
 R	php:S1808"=Move this open curly brace to the beginning of the next line.(ù°¶
-[	php:S1808"FMove this "else" to the same line as the previous closing curly brace.(á¢–¬
+[	php:S1808"FMove this "else" to the same line as the previous closing curly brace.(á¢–¬
 d	php:S1808"JPut one space between the closing parenthesis and the opening curly brace.(š§±‰ÿÿÿÿÿ
-_	php:S1808"JPut one space between the closing parenthesis and the opening curly brace.(ƒº¬
+d	php:S1808"JPut one space between the closing parenthesis and the opening curly brace.(¦ëğ÷üÿÿÿÿ
+_	php:S1808"JPut one space between the closing parenthesis and the opening curly brace.(ƒº¬
 ^	php:S1808"DPut one space between this "if" keyword and the opening parenthesis.(š§±‰ÿÿÿÿÿ
-Y	php:S1808"DPut one space between this "if" keyword and the opening parenthesis.(ƒº¬
-[	php:S1808"FPut one space between this "else" keyword and the opening curly brace.(á¢–¬
+^	php:S1808"DPut one space between this "if" keyword and the opening parenthesis.(¦ëğ÷üÿÿÿÿ
+Y	php:S1808"DPut one space between this "if" keyword and the opening parenthesis.(ƒº¬
+[	php:S1808"FPut one space between this "else" keyword and the opening curly brace.(á¢–¬
 @	php:S2003"&Replace "require" with "require_once".(şàŞ€ÿÿÿÿÿ
 @	php:S2003"&Replace "require" with "require_once".(òß‰İÿÿÿÿÿ
 ;	php:S2003"&Replace "require" with "require_once".(ê¼÷ˆ

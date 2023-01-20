@@ -15,6 +15,10 @@ class SignUpController
     }
     private function createUser() :void{
         if(isset($_POST["btnRegister"])){
+            if($this->userService->CheckUserExistenceByEmail(htmlspecialchars($_POST["email"]))){
+                echo"<script>displayModalForSignUp('ooooooops!','The email address you entered is already taken, Please choose another email address')</script>";
+                return;
+            }
            $userDetails= array(
                "firstName" =>htmlspecialchars($_POST["FirstName"]),
                "lastName" =>htmlspecialchars($_POST["LastName"]),
