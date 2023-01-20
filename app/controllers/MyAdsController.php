@@ -67,9 +67,9 @@ class MyAdsController
     private function showAds()
     {
         if (!is_null($this->loggedUser)) {
+            require __DIR__ . '/../Views/MyAdsPage/EditAdsModal.php'; // so that it can accessed by javascript
             if (!is_null($this->adService->getAdsByLoggedUser($this->loggedUser))) {
                 $loggedUserAds = $this->adService->getAdsByLoggedUser($this->loggedUser);
-                require __DIR__ . '/../Views/MyAdsPage/EditAdsModal.php';
                 require __DIR__ . '/../Views/MyAdsPage/MyAdsdivShowsAds.php';
             } else {
                 require __DIR__ . '/../Views/MyAdsPage/NoAdsYet.html';

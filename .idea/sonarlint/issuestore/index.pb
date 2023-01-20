@@ -1,7 +1,4 @@
 
-:
-
-.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 >
 .gitattributes,2\4\24139dae656713ba861751fb2c2ac38839349a7a
 G
@@ -22,8 +19,6 @@ C
 app/Models/User.php,a\9\a90f2e50cb06863b54effced365aa5f1fe7d9c88
 E
 app/Models/Status.php,3\5\35b711f98d079fe1c67c917249fbda230b20be18
-S
-#app/controllers/MyAdsController.php,b\6\b685e3906b18720862971461944122e06c190c62
 T
 $app/Views/MyAdsPage/EditAdsModal.php,d\0\d0548578d9eb78ffcd091854bad1d2f1e4849657
 c
@@ -50,10 +45,6 @@ M
 app/Views/MyAdsPage/MyAds.php,6\5\65324de82e0853f9e274d43241e74a5b8f0e2ef2
 X
 (app/Views/MyAdsPage/MyAdsdivShowsAds.php,d\1\d10ce2f01c208ac05037cf69ef10948f536ccbb1
-B
-docker-compose.yml,3\5\35b8c13cf2eb2a194eada000eb310d65aed53b2a
->
-PHP.Dockerfile,b\2\b237dce4c8a76d56b7cdfe507e61f82336214311
 O
 app/public/Javascripts/Login.js,5\f\5f4ed0afa0e081a3da96c9153668e17d07291383
 S
@@ -84,9 +75,6 @@ J
 app/Services/AdService.php,3\1\31521ae381195e38733a34c6800258423426ed81
 L
 app/public/Javascripts/Ad.js,1\6\16441a563f6d8ae7fed0d5e8685c571d3da823af
-:
-
-nginx.conf,e\d\ed8b45da44d73de79bd7c1c203a419d6ee7d6fde
 D
 app/public/index.php,d\f\df187f96b153386aefda0ec4775d5524cf695467
 U
@@ -101,7 +89,3 @@ T
 $app/controllers/SignUpController.php,e\f\effba894470d4957235cba8067f0791c11044c17
 S
 #app/repositories/UserRepository.php,9\3\93095e6fa25a2d3fb64a8d0030dc6426c9435ad4
-C
-sql/OurMarketDB.sql,0\5\05a46ac25d8ed2b63d7663a8b3c177245304c86a
-L
-app/Services/UserService.php,4\1\4165f29445980afc3d0235551b5a3a460930bd28
