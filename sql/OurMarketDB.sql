@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Jan 20, 2023 at 08:34 PM
+-- Generation Time: Jan 20, 2023 at 10:04 PM
 -- Server version: 10.9.4-MariaDB-1:10.9.4+maria~ubu2204
 -- PHP Version: 8.0.25
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `OurMarketDB`
 --
-CREATE DATABASE IF NOT EXISTS `OurMarketDB` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `OurMarketDB`;
 
 -- --------------------------------------------------------
 
