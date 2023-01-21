@@ -144,7 +144,7 @@ function createHorizontalAdCard(ad) {
     // Create the price list item element
     let priceListItem = document.createElement("li");
     priceListItem.classList.add("list-group-item");
-    priceListItem.innerHTML = '<strong>Price:</strong> €' + ad.price.toFixed(2);
+    priceListItem.innerHTML = '<strong>Price:</strong> €' + formatPricesInDecimal(ad.price);
     listGroup.appendChild(priceListItem);
 
     // Create the status list item element
@@ -526,7 +526,7 @@ function showAvailableAdsForHomePage(ad) {
     let button = document.createElement("button");
     button.classList.add("btn", "btn-primary", "position-relative");
     button.type = "submit";
-    button.innerHTML = "<i class='fa-solid fa-cart-plus'></i> €" + ad.price.toString();
+    button.innerHTML = "<i class='fa-solid fa-cart-plus'></i> €" + formatPricesInDecimal(ad.price);
     // add event listener to button
     button.addEventListener("click", function () {
         addToCartClicked(ad.id);
@@ -575,4 +575,12 @@ function addToCartClicked(adID) {
     document.body.appendChild(form);
     form.submit();
 }
-
+function formatPricesInDecimal(price){
+    let formattedPrice = new Intl.NumberFormat('en-US', {
+        style: 'decimal',
+        useGrouping: true,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(price);
+    return formattedPrice;
+}

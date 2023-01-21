@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Jan 21, 2023 at 10:02 AM
+-- Generation Time: Jan 21, 2023 at 01:04 PM
 -- Server version: 10.9.4-MariaDB-1:10.9.4+maria~ubu2204
 -- PHP Version: 8.0.25
 
@@ -45,18 +45,16 @@ CREATE TABLE `Ads` (
 --
 
 INSERT INTO `Ads` (`id`, `productName`, `description`, `postedDate`, `price`, `userID`, `imageURI`, `status`) VALUES
-(7, 'CrossFire &amp;lt;H1&amp;gt; Bijay&amp;lt;/H1&amp;gt;', 'Used for 9 Years &amp;#039;Bijay&amp;#039;', '2022-12-30', '29900.90', 1, '/img/CrossFire-2022-12-30-Test.jpg', 'Expired'),
-(8, 'Honda Crf 250', 'New Honda CRf -250 ,2000km run only&amp;quot; Newly New&amp;quot;', '2022-12-30', '9500.00', 1, '/img/Honda Crf 250-2022-12-30-Test.jpg', 'Sold'),
-(13, 'Ktm Duke-390', 'The KTM 790 DUKE is as surgical as its nickname suggests. With the agility, you expect from a single, combined playground. Newly New', '2023-01-01', '900.00', 1, '/img/Ktm Duke-390-2023-01-01-Test.jpg', 'Available'),
+(8, 'Honda Crf 250', 'New Honda CRf -250 ,2000km run only&amp;quot; Newly', '2022-12-30', '9500.00', 1, '/img/Honda Crf 250-2022-12-30-Test.jpg', 'Expired'),
+(13, 'Ktm Duke-390', 'The KTM 790 DUKE is as surgical as its nickname suggests. With the agility, you expect from a single, combined playground. Newly New', '2023-01-01', '900.00', 1, '/img/Ktm Duke-390-2023-01-01-Test.jpg', 'Sold'),
 (14, 'Honda Crf 250', 'New Honda CRf -250 ,2000km run only', '2022-12-30', '9000.00', 1, '/img/Honda Crf 250-2022-12-30-Test.jpg', 'Available'),
 (21, 'CrossFireNew ', 'Bijay  ', '2023-01-06', '900.00', 1, '/img/CrossFireNew -2023-01-06-Test.jpg', 'Sold'),
-(22, 'crossfire New &amp;quot;2020 Model&amp;quot;', 'Bijay&amp;quot;new one &amp;quot;', '2023-01-06', '900.00', 1, '/img/OurMarket-2023-01-06-Test.jpeg', 'Sold'),
 (23, 'cxcxcxc', 'dffffffffffffff', '2023-01-09', '9000.20', 1, '/img/OurMarket-2023-01-09-Test.jpg', 'Sold'),
 (24, 'CrossFire new', 'Bijay', '2023-01-09', '9000.00', 1, '/img/OurMarket-2023-01-09-1673296197-Test.jpg', 'Sold'),
 (25, 'Bijay', 'sdsdsdsd', '2023-01-12', '90000.00', 1, '/img/OurMarket-2023-01-12-1673562154-Test.jpg', 'Sold'),
 (26, 'Newly New Bike', 'hvbv b hvv', '2023-01-15', '900.00', 1, '/img/OurMarket-2023-01-15-1673781376-Test.png', 'Available'),
-(27, 'Electric Bike-2022 ', 'Americans Bike ', '2023-01-15', '1200.00', 1, '/img/OurMarket-2023-01-15-1673794055-Test.png', 'Available'),
-(28, 'Benelli Tnt- 300', 'Mode Benelli TNT-300 ', '2023-01-16', '5000.50', 1, '/img/OurMarket-2023-01-16-1673912055-Test.png', 'Available'),
+(27, 'Electric Bike-2022 ', 'Americans Bike ', '2023-01-15', '1200.00', 1, '/img/OurMarket-2023-01-15-1673794055-Test.png', 'Expired'),
+(28, 'Benelli Tnt- 300', 'Mode Benelli TNT-300 ', '2023-01-16', '5000.60', 1, '/img/OurMarket-2023-01-16-1673912055-Test.png', 'Available'),
 (30, 'Yatri Bike ', 'Brand New', '2023-01-20', '900.00', 4, '/img/OurMarket-2023-01-20-1674226194-Muna.png', 'Available'),
 (31, 'fcv', 'cvcvcvcv', '2023-01-20', '900.50', 4, '/img/OurMarket-2023-01-20-1674236314-Muna.jpg', 'Sold');
 

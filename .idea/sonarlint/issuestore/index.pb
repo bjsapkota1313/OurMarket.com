@@ -57,8 +57,6 @@ P
  app/public/Javascripts/SignUp.js,9\4\943314289f2debccdb666dd476e37786c48d9e66
 S
 #app/controllers/LoginController.php,d\5\d510a89867b4fd29ec2a71e986620ee680844556
-9
-	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 M
 app/Views/LoginPage/Login.php,9\9\994a0c60c3f3b6fb90162afea2c5cbcba9213a06
 N
@@ -73,8 +71,6 @@ O
 app/repositories/Repository.php,7\1\71fd6e7ac4fbf91ae0809f5720740e19086158e7
 J
 app/Services/AdService.php,3\1\31521ae381195e38733a34c6800258423426ed81
-L
-app/public/Javascripts/Ad.js,1\6\16441a563f6d8ae7fed0d5e8685c571d3da823af
 D
 app/public/index.php,d\f\df187f96b153386aefda0ec4775d5524cf695467
 U
@@ -89,21 +85,3 @@ T
 $app/controllers/SignUpController.php,e\f\effba894470d4957235cba8067f0791c11044c17
 S
 #app/repositories/UserRepository.php,9\3\93095e6fa25a2d3fb64a8d0030dc6426c9435ad4
-C
-sql/OurMarketDB.sql,0\5\05a46ac25d8ed2b63d7663a8b3c177245304c86a
-:
-
-.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
-:
-
-nginx.conf,e\d\ed8b45da44d73de79bd7c1c203a419d6ee7d6fde
->
-PHP.Dockerfile,b\2\b237dce4c8a76d56b7cdfe507e61f82336214311
-S
-#app/controllers/MyAdsController.php,b\6\b685e3906b18720862971461944122e06c190c62
-L
-app/Services/UserService.php,4\1\4165f29445980afc3d0235551b5a3a460930bd28
-B
-docker-compose.yml,3\5\35b8c13cf2eb2a194eada000eb310d65aed53b2a
-E
-sql/developmentdb.sql,f\d\fdc8268131af7e95180eea28efaa2514653ddb60
