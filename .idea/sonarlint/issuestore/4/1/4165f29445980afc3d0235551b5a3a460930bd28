@@ -1,0 +1,4 @@
+
+^	php:S1808("=Move this open curly brace to the beginning of the next line.(’’²·üÿÿÿÿ8¿àÀˆÝ0
+€php:S100("`Rename function "CheckUserExistenceByEmail" to match the regular expression ^[a-z][a-zA-Z0-9]*$.(’’²·üÿÿÿÿ8ÀàÀˆÝ0
+m	php:S4833"QReplace "require_once" with namespace import mechanism through the "use" keyword.(®§Ý…8ÀàÀˆÝ0
