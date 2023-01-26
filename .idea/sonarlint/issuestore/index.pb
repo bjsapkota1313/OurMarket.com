@@ -1,6 +1,4 @@
 
->
-.gitattributes,2\4\24139dae656713ba861751fb2c2ac38839349a7a
 G
 app/public/img/cart.svg,7\0\70a9e005672554b16d24ea8e4c977533d96d7859
 R
@@ -13,8 +11,6 @@ O
 .app/Views/HomePage/NoAdsAvailableToBeSold.html,7\e\7ec77d74c006a9a00e4c6e405259ea9975058280
 Q
 !app/Views/MyAdsPage/NoAdsYet.html,f\0\f07b21d52d5ddbf4d9750f0d72141062f2e6756b
-U
-%app/controllers/PaymentController.php,e\b\ebe3b0268b12575d2efa439939d4f85937da2083
 C
 app/Models/User.php,a\9\a90f2e50cb06863b54effced365aa5f1fe7d9c88
 E
@@ -39,8 +35,6 @@ J
 app/Logic/ShoppingCart.php,d\1\d1897217963f728894f1444fec87cc7952a64148
 A
 app/Models/Ad.php,8\3\8356892ea7f1fff336ad0c110aa0b83f4c947698
-K
-app/Views/HomePage/Home.php,8\7\872761465d7850144f847685d4f29a502b29908e
 M
 app/Views/MyAdsPage/MyAds.php,6\5\65324de82e0853f9e274d43241e74a5b8f0e2ef2
 X
@@ -51,8 +45,6 @@ S
 #app/Views/LoginPage/LoginFooter.php,2\1\21dae2ff33d15ff29385c38057e9d4927180eca5
 S
 #app/Views/SignUpNewUser/SignUp.html,8\3\83c5edb35deb90eba30252968ddcbe988db98e90
-D
-app/Views/Footer.php,6\3\63739ca8812045628ef7f65c86907280b3f72b67
 P
  app/public/Javascripts/SignUp.js,9\4\943314289f2debccdb666dd476e37786c48d9e66
 S
@@ -85,3 +77,17 @@ T
 $app/controllers/SignUpController.php,e\f\effba894470d4957235cba8067f0791c11044c17
 S
 #app/repositories/UserRepository.php,9\3\93095e6fa25a2d3fb64a8d0030dc6426c9435ad4
+B
+docker-compose.yml,3\5\35b8c13cf2eb2a194eada000eb310d65aed53b2a
+>
+PHP.Dockerfile,b\2\b237dce4c8a76d56b7cdfe507e61f82336214311
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+:
+
+nginx.conf,e\d\ed8b45da44d73de79bd7c1c203a419d6ee7d6fde
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
+C
+sql/OurMarketDB.sql,0\5\05a46ac25d8ed2b63d7663a8b3c177245304c86a
