@@ -26,7 +26,7 @@ To run the application, use the command:
 docker-compose down -v
 docker-compose up
 ```
-after docker is composed  open http://localhost/home/myAds 
+Deployed Website link:  https://ourmarketversion.000webhostapp.com/
 
 ## Test Users
 Two test users have been provided with the following credentials:
