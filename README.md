@@ -16,7 +16,7 @@ This application is a web-based ads platform that utilizes the following technol
 - The application also includes four local APIs for editing, creating, deleting and searching products, and a shopping cart feature for purchasing them. 
 - The application use the Argon2 for password hashing and verifying.
 - The application includes a script to automatically create the MySQL database, but in case that doesn't work, a file is provided that can be imported.
-- In case the database creating while creating dabase doesznot work a file is provied which can be imported
+- In case the database creating while creating dabase doesznot work a file is provided which can be imported
 - The application is designed to make it easy and user-friendly.
 
 ## Running the Application
